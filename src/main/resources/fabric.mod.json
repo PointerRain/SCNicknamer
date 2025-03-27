@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "sc-name-link",
 	"version": "${version}",
-	"name": "Spooncraft Name Link",
-	"description": "Links nicknames and name colours with the Mumbo Jumbo Discord server.",
+	"name": "SCNicknamer",
+	"description": "Lightweight client-side nickname mod.",
 	"authors": [
 		"GoldenRedstone"
 	],

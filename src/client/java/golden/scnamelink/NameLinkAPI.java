@@ -94,7 +94,7 @@ public class NameLinkAPI {
      * @throws URISyntaxException If the API URL is incorrectly formatted.
      */
     private static String loadJsonFromUrl(String source) throws IOException, URISyntaxException {
-        StringBuilder result = new StringBuilder(50000);
+        StringBuilder result = new StringBuilder();
         URL url = new URI(source).toURL();
         int retries = 0;
 
@@ -206,6 +206,7 @@ public class NameLinkAPI {
      * - {@code "Success":} Data was successfully fetched from the API.<br>
      * - {@code "Fallback"}: Data was loaded from the cache.<br>
      * - {@code "Failure"}: Both API and cache loading failed.<br>
+     * - {@code "Disabled"}: The mod is disabled in the configuration.
      *
      * @return The current status as a string.
      */

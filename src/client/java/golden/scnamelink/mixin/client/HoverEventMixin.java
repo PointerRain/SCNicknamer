@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,14 +33,11 @@ public abstract class HoverEventMixin {
     @Nullable
     private List<Text> tooltip;
 
-    @Inject (method = "asTooltip", at = @At ("HEAD"))
+    @Inject (method = "asTooltip()Ljava/util/List;", at = @At ("HEAD"))
     public @Nullable List<Text> asTooltip(CallbackInfoReturnable<List<Text>> cir) {
         if (this.tooltip == null) {
             this.tooltip = new ArrayList<>();
-            Optional<Text> var10000 = this.name;
-            List<Text> var10001 = this.tooltip;
-            Objects.requireNonNull(var10001);
-            var10000.ifPresent(var10001::add);
+            this.name.ifPresent(this.tooltip::add);
             this.tooltip.add(Text.translatable("gui.entity_tooltip.type",
                                                this.entityType.getName()));
             if (this.entityType == EntityType.PLAYER && this.name.isPresent()) {

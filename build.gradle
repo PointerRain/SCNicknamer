@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id 'fabric-loom' version '1.10-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -23,7 +23,7 @@ repositories {
         url = "https://maven.terraformersmc.com/"
     }
     // ClothConfig
-    maven { url "https://maven.shedaniel.me/" }
+    maven { url = "https://maven.shedaniel.me/" }
 }
 
 loom {
@@ -35,7 +35,6 @@ loom {
             sourceSet sourceSets.client
         }
     }
-
 }
 
 fabricApi {
@@ -60,10 +59,11 @@ dependencies {
 }
 
 processResources {
-    inputs.property "version", project.version
+    def projectVersion = project.version
+    inputs.property "version", projectVersion
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": projectVersion
     }
 }
 
@@ -82,8 +82,9 @@ java {
 }
 
 jar {
+    def archivesBaseName = project.base.archivesName
     from("LICENSE") {
-        rename { "${it}_${project.base.archivesName.get()}" }
+        rename { "${it}_${archivesBaseName.get()}" }
     }
 }
 
