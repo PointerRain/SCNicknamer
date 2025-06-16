@@ -59,12 +59,11 @@ dependencies {
 }
 
 processResources {
-    def projectVersion = project.version
-    inputs.property "version", projectVersion
+	inputs.property "version", project.version
 
-    filesMatching("fabric.mod.json") {
-        expand "version": projectVersion
-    }
+	filesMatching("fabric.mod.json") {
+		expand "version": inputs.properties.version
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -82,10 +81,11 @@ java {
 }
 
 jar {
-    def archivesBaseName = project.base.archivesName
-    from("LICENSE") {
-        rename { "${it}_${archivesBaseName.get()}" }
-    }
+	inputs.property "archivesName", project.base.archivesName
+
+	from("LICENSE") {
+		rename { "${it}_${inputs.properties.archivesName}"}
+	}
 }
 
 // configure the maven publication

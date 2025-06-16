@@ -36,6 +36,10 @@ public abstract class PlayerListEntryMixin {
             return;
         }
 
+        if (displayName == null && profile.getName() != null) {
+            displayName = Text.literal(profile.getName());
+        }
+
         Text label = SpooncraftNameLinkClient.getStyledName(displayName, profile.getId(),
                                                             profile.getName(),
                                                             CONFIG.replacetablist, CONFIG.colourtablist);
