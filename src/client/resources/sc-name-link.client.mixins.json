@@ -5,9 +5,10 @@
   "client": [
     "ChatHudMixin",
     "ClientPlayNetworkHandlerMixin",
+    "HoverEventMixin",
     "PlayerEntityRendererMixin",
     "PlayerListEntryMixin",
-    "HoverEventMixin"
+    "TrackedWaypointMixin"
   ],
   "injectors": {
     "defaultRequire": 1

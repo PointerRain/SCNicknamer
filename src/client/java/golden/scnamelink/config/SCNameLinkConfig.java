@@ -30,4 +30,7 @@ public class SCNameLinkConfig implements ConfigData {
     public boolean replacechat = false;
     // Whether to colour names in the chat using the colour from discord.
     public boolean colourchat = true;
+
+    // Whether to colour the icons in the locator bar.
+    public boolean locatorbar = true;
 }

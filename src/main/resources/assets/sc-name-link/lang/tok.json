@@ -8,6 +8,7 @@
     "text.autoconfig.scnamelink.option.colournametag": "kule e nimi pi jan",
     "text.autoconfig.scnamelink.option.replacechat": "nimi pi toki poka lon toki",
     "text.autoconfig.scnamelink.option.colourchat": "kule e nimi lon toki",
+    "text.autoconfig.scnamelink.option.locatorbar": "kule e ijo pi lukin lon",
     "text.scnamelink.status.disabled": "ilo nimi Spooncraft li pini.",
     "text.scnamelink.status.working": "ilo nimi Spooncraft li awen pali.",
     "text.scnamelink.status.fallback": "ilo nimi Spooncraft li ken ala kama jo e ilo pi lawa tomo. o pana kepeken ilo kama sina.",
