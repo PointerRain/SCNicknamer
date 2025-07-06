@@ -38,7 +38,7 @@ public class TrackedWaypointMixin {
             return;
         }
         DisplayMapping mapping = SpooncraftNameLinkClient.getMapping(uuid, null);
-        if (mapping == null) {
+        if (mapping == null || mapping.colour == null || mapping.colour.isEmpty()) {
             return;
         }
         int k = ColorHelper.withAlpha(255, Integer.parseInt(mapping.colour, 16));
