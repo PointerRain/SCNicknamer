@@ -5,16 +5,24 @@
 	"name": "SCNicknamer",
 	"description": "Lightweight client-side nickname mod.",
 	"authors": [
-		"GoldenRedstone"
+		{
+			"name": "GoldenRedstone",
+			"contact": {
+				"homepage": "https://github.com/PointerRain",
+				"discord": "pointer_rain"
+			}
+		}
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/sc-name-link",
 		"sources": "https://github.com/GoldenRedstone/SCNicknamer",
-		"modrinth": "https://modrinth.com/mod/sc-name-link"
+		"issues": "https://github.com/PointerRain/SCNicknamer/issues",
+		"modrinth": "https://modrinth.com/mod/sc-name-link",
+		"discord": "https://discord.gg/mumbo-jumbo-server-377946908783673344"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/sc-name-link/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"golden.scnamelink.SpooncraftNameLinkClient"
@@ -31,7 +39,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.5",
-		"minecraft": "~1.21",
+		"minecraft": "^1.21.5",
 		"java": ">=21",
 		"fabric-api": "*",
 		"cloth-config": "*"

@@ -1,5 +1,5 @@
 {
-    "text.autoconfig.scnamelink.title": "Spooncraft Name Link",
+    "text.autoconfig.scnamelink.title": "SCNicknamer",
     "text.autoconfig.scnamelink.option.enableMod": "Enable Mod",
     "text.autoconfig.scnamelink.option.apiLink": "API Link",
     "text.autoconfig.scnamelink.option.replacetablist": "Nicknames in the tablist",
