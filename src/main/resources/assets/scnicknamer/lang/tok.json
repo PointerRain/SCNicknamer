@@ -1,0 +1,21 @@
+{
+    "text.autoconfig.scnicknamer.title": "ilo nimi Spooncraft",
+    "text.autoconfig.scnicknamer.option.enableMod": "o pali e ilo",
+    "text.autoconfig.scnicknamer.option.apiLink": "len API",
+    "text.autoconfig.scnicknamer.option.replacetablist": "nimi pi toki poka lon palisa lipu",
+    "text.autoconfig.scnicknamer.option.colourtablist": "kule e nimi lon palisa",
+    "text.autoconfig.scnicknamer.option.replacenametag": "nimi pi toki poka lon nimi lipu",
+    "text.autoconfig.scnicknamer.option.colournametag": "kule e nimi pi jan",
+    "text.autoconfig.scnicknamer.option.replacechat": "nimi pi toki poka lon toki",
+    "text.autoconfig.scnicknamer.option.colourchat": "kule e nimi lon toki",
+    "text.autoconfig.scnicknamer.option.locatorbar": "kule e ijo pi lukin lon",
+    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "o pini musi o open sin e musi.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "o pana e ijo ala, la sina sona ala.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "o pini musi o open sin e musi.",
+    "text.scnicknamer.status.disabled": "ilo nimi Spooncraft li pini.",
+    "text.scnicknamer.status.working": "ilo nimi Spooncraft li awen pali.",
+    "text.scnicknamer.status.fallback": "ilo nimi Spooncraft li ken ala kama jo e ilo pi lawa tomo. o pana kepeken ilo kama sina.",
+    "text.scnicknamer.status.failure": "ilo nimi Spooncraft li ken ala kama jo e ilo pi lawa tomo anu ilo kama.",
+    "text.scnicknamer.status.success": "ilo li kama tan ilo pi lawa tomo.",
+    "gui.scnicknamer.hover_nickname": "nimi poka: %s"
+}

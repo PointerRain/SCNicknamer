@@ -1,4 +1,4 @@
-package golden.scnamelink.config;
+package golden.scnicknamer.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -7,8 +7,8 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 /**
  * Stores configuration options for the Spooncraft Name Link mod.
  */
-@Config (name = "scnamelink")
-public class SCNameLinkConfig implements ConfigData {
+@Config (name = "scnicknamer")
+public class SCNicknamerConfig implements ConfigData {
     // Whether to enable the mod. Game should be restarted after enabling.
     @ConfigEntry.Gui.Tooltip
     public boolean enableMod = true;

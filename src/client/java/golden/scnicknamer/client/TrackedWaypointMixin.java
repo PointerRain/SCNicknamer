@@ -1,9 +1,9 @@
-package golden.scnamelink.mixin.client;
+package golden.scnicknamer.client;
 
 import com.mojang.datafixers.util.Either;
-import golden.scnamelink.DisplayMapping;
-import golden.scnamelink.SpooncraftNameLinkClient;
-import golden.scnamelink.config.SCNameLinkConfig;
+import golden.scnicknamer.DisplayMapping;
+import golden.scnicknamer.SCNicknamerClient;
+import golden.scnicknamer.config.SCNicknamerConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.waypoint.TrackedWaypoint;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Mixin (TrackedWaypoint.class)
 public class TrackedWaypointMixin {
     @Unique
-    SCNameLinkConfig CONFIG = AutoConfig.getConfigHolder(SCNameLinkConfig.class).getConfig();
+    SCNicknamerConfig CONFIG = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
     @Shadow
     @Final
     protected Either<UUID, String> source;
@@ -37,7 +37,7 @@ public class TrackedWaypointMixin {
         if (uuid == null) {
             return;
         }
-        DisplayMapping mapping = SpooncraftNameLinkClient.getMapping(uuid, null);
+        DisplayMapping mapping = SCNicknamerClient.getMapping(uuid, null);
         if (mapping == null || mapping.colour == null || mapping.colour.isEmpty()) {
             return;
         }

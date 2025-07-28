@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "sc-name-link",
+	"id": "scnicknamer",
 	"version": "${version}",
 	"name": "SCNicknamer",
 	"description": "Lightweight client-side nickname mod.",
@@ -21,30 +21,34 @@
 		"discord": "https://discord.gg/mumbo-jumbo-server-377946908783673344"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/sc-name-link/icon.png",
 	"environment": "client",
+	"icon": "assets/scnicknamer/icon.png",
 	"entrypoints": {
-		"client": [
-			"golden.scnamelink.SpooncraftNameLinkClient"
-		],
-		"modmenu": [
-			"golden.scnamelink.config.ModMenuIntegration"
-		]
+		"client": ["golden.scnicknamer.SCNicknamerClient"],
+		"modmenu": ["golden.scnicknamer.config.ModMenuIntegration"]
 	},
 	"mixins": [
 		{
-			"config": "sc-name-link.client.mixins.json",
+			"config": "scnicknamer.client.mixins.json",
 			"environment": "client"
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.5",
 		"minecraft": "^1.21.5",
+		"fabricloader": ">=${loader_version}",
 		"java": ">=21",
 		"fabric-api": "*",
 		"cloth-config": "*"
 	},
 	"suggests": {
 		"modmenu": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/mumbo-jumbo-server-377946908783673344",
+				"modmenu.modrinth": "https://modrinth.com/mod/sc-name-link"
+			}
+		}
 	}
 }

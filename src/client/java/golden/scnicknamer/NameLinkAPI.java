@@ -1,4 +1,4 @@
-package golden.scnamelink;
+package golden.scnicknamer;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

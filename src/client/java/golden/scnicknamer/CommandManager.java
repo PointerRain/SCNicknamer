@@ -1,4 +1,4 @@
-package golden.scnamelink;
+package golden.scnicknamer;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -10,7 +10,7 @@ public class CommandManager {
         dispatcher.register(ClientCommandManager.literal("scnamelink")
 //            .then(ClientCommandManager.literal("reload")
 //                .executes(context -> {
-//                    SpooncraftNameLinkClient.getMappings(null);
+//                    SCNicknamerClient.getMappings(null);
 //                    context.getSource().sendFeedback(Text.literal("Reloaded SCNameLink mappings"));
 //                    return 1;
 //                }))
@@ -18,8 +18,8 @@ public class CommandManager {
                 .then(ClientCommandManager.argument("source", StringArgumentType.greedyString())
                     .executes(context -> {
                         String source = StringArgumentType.getString(context, "source");
-                        SpooncraftNameLinkClient.getMappings(source);
-                        context.getSource().sendFeedback(SpooncraftNameLinkClient.getStatusString());
+                        SCNicknamerClient.getMappings(source);
+                        context.getSource().sendFeedback(SCNicknamerClient.getStatusString());
                         return 1;
                     }))));
     }

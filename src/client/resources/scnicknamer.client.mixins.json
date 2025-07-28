@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "golden.scnamelink.mixin.client",
+  "package": "golden.scnicknamer.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ChatHudMixin",

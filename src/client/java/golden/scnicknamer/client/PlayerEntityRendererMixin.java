@@ -1,7 +1,7 @@
-package golden.scnamelink.mixin.client;
+package golden.scnicknamer.client;
 
-import golden.scnamelink.SpooncraftNameLinkClient;
-import golden.scnamelink.config.SCNameLinkConfig;
+import golden.scnicknamer.SCNicknamerClient;
+import golden.scnicknamer.config.SCNicknamerConfig;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 @Mixin (PlayerEntityRenderer.class)
 public abstract class PlayerEntityRendererMixin {
     @Unique
-    SCNameLinkConfig CONFIG = AutoConfig.getConfigHolder(SCNameLinkConfig.class).getConfig();
+    SCNicknamerConfig CONFIG = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
 
     @ModifyArgs(method = "renderLabelIfPresent(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             at = @At(value = "INVOKE",
@@ -29,8 +29,8 @@ public abstract class PlayerEntityRendererMixin {
 
         PlayerEntityRenderState player = args.get(0);
         Text display_name = args.get(1);
-        Text label = SpooncraftNameLinkClient.getStyledName(display_name, player.name,
-                                                            CONFIG.replacenametag, CONFIG.colournametag);
+        Text label = SCNicknamerClient.getStyledName(display_name, player.name,
+                                                     CONFIG.replacenametag, CONFIG.colournametag);
         args.set(1, label);
     }
 }

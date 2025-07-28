@@ -1,6 +1,6 @@
-package golden.scnamelink;
+package golden.scnicknamer;
 
-import golden.scnamelink.config.SCNameLinkConfig;
+import golden.scnicknamer.config.SCNicknamerConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * Client-side mod initializer for the Minecraft mod "Spooncraft Name Link".
  */
-public class SpooncraftNameLinkClient implements ClientModInitializer {
+public class SCNicknamerClient implements ClientModInitializer {
 
     // The mod ID as used in logging
     static final String MOD_ID = "scnamelink";
@@ -26,7 +26,7 @@ public class SpooncraftNameLinkClient implements ClientModInitializer {
     // Logger for outputting information to the console and log files
     static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    static SCNameLinkConfig config;
+    static SCNicknamerConfig config;
 
     // List of mappings for replacement and optional color changes
     private static List<DisplayMapping> mappings = new ArrayList<>();
@@ -200,8 +200,8 @@ public class SpooncraftNameLinkClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        AutoConfig.register(SCNameLinkConfig.class, Toml4jConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(SCNameLinkConfig.class).getConfig();
+        AutoConfig.register(SCNicknamerConfig.class, Toml4jConfigSerializer::new);
+        config = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
 
         final int count = getMappings(config.apiLink);
         if (count > 0) {

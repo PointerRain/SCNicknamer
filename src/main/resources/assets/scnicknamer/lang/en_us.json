@@ -1,0 +1,21 @@
+{
+    "text.autoconfig.scnicknamer.title": "SCNicknamer",
+    "text.autoconfig.scnicknamer.option.enableMod": "Enable Mod",
+    "text.autoconfig.scnicknamer.option.apiLink": "API Link",
+    "text.autoconfig.scnicknamer.option.replacetablist": "Nicknames in the tablist",
+    "text.autoconfig.scnicknamer.option.colourtablist": "Color names in the tablist",
+    "text.autoconfig.scnicknamer.option.replacenametag": "Nicknames in nametags",
+    "text.autoconfig.scnicknamer.option.colournametag": "Color player nametags",
+    "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in chat",
+    "text.autoconfig.scnicknamer.option.colourchat": "Color names in chat",
+    "text.autoconfig.scnicknamer.option.locatorbar": "Color icons in the locator bar",
+    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Game should be restarted after enabling.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank for Spooncraft.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Game should be restarted after changing.",
+    "text.scnicknamer.status.disabled": "SCNicknamer is disabled.",
+    "text.scnicknamer.status.working": "SCNicknamer has not finished setting up yet.",
+    "text.scnicknamer.status.fallback": "SCNicknamer could not reach the server. Using cached fallback.",
+    "text.scnicknamer.status.failure": "SCNicknamer could not reach the server or find a fallback.",
+    "text.scnicknamer.status.success": "Loaded mappings from the server.",
+    "gui.scnicknamer.hover_nickname": "Nickname: %s"
+}

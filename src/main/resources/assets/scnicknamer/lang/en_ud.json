@@ -1,0 +1,21 @@
+{
+    "text.autoconfig.scnicknamer.title": "ɹǝɯɐuʞɔᴉNƆS",
+    "text.autoconfig.scnicknamer.option.enableMod": "poW ǝꞁqɐuƎ",
+    "text.autoconfig.scnicknamer.option.apiLink": "ʞuᴉꞀ IԀⱯ",
+    "text.autoconfig.scnicknamer.option.replacetablist": "ʇsᴉꞁqɐʇ ǝɥʇ uᴉ sǝɯɐuʞɔᴉN",
+    "text.autoconfig.scnicknamer.option.colourtablist": "ʇsᴉꞁqɐʇ ǝɥʇ uᴉ sǝɯɐu ɹnoꞁoƆ",
+    "text.autoconfig.scnicknamer.option.replacenametag": "sᵷɐʇǝɯɐu uᴉ sǝɯɐuʞɔᴉN",
+    "text.autoconfig.scnicknamer.option.colournametag": "sᵷɐʇǝɯɐu ɹǝʎɐꞁd ɹnoꞁoƆ",
+    "text.autoconfig.scnicknamer.option.replacechat": "ʇɐɥɔ uᴉ sǝɯɐuʞɔᴉN",
+    "text.autoconfig.scnicknamer.option.colourchat": "ʇɐɥɔ uᴉ sǝɯɐu ɹnoꞁoƆ",
+    "text.autoconfig.scnicknamer.option.locatorbar": "ɹɐq ɹoʇɐɔoꞁ ǝɥʇ uᴉ suoɔᴉ ɹnoꞁoƆ",
+    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "˙ᵷuᴉꞁqɐuǝ ɹǝʇɟɐ pǝʇɹɐʇsǝɹ ǝq pꞁnoɥs ǝɯɐ⅁",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "˙ʇɟɐɹɔuoodS ɹoɟ ʞuɐꞁq ǝʌɐǝꞀ",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "˙ᵷuᴉᵷuɐɥɔ ɹǝʇɟɐ pǝʇɹɐʇsǝɹ ǝq pꞁnoɥs ǝɯɐ⅁",
+    "text.scnicknamer.status.disabled": "˙pǝꞁqɐsᴉp sᴉ ɹǝɯɐuʞɔᴉNƆS",
+    "text.scnicknamer.status.working": "˙ʇǝʎ dn ᵷuᴉʇʇǝs pǝɥsᴉuᴉɟ ʇou sɐɥ ɹǝɯɐuʞɔᴉNƆS",
+    "text.scnicknamer.status.fallback": "˙ʞɔɐqꞁꞁɐɟ pǝɥɔɐɔ ᵷuᴉs∩ ˙ɹǝʌɹǝs ǝɥʇ ɥɔɐǝɹ ʇou pꞁnoɔ ɹǝɯɐuʞɔᴉNƆS",
+    "text.scnicknamer.status.failure": "˙ʞɔɐqꞁꞁɐɟ ɐ puᴉɟ ɹo ɹǝʌɹǝs ǝɥʇ ɥɔɐǝɹ ʇou pꞁnoɔ ɹǝɯɐuʞɔᴉNƆS",
+    "text.scnicknamer.status.success": "˙ɹǝʌɹǝs ǝɥʇ ɯoɹɟ sᵷuᴉddɐɯ pǝpɐoꞀ",
+    "gui.scnicknamer.hover_nickname": "s% :ǝɯɐuʞɔᴉN"
+}

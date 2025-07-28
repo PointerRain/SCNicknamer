@@ -1,7 +1,7 @@
-package golden.scnamelink.mixin.client;
+package golden.scnicknamer.client;
 
-import golden.scnamelink.SpooncraftNameLinkClient;
-import golden.scnamelink.config.SCNameLinkConfig;
+import golden.scnicknamer.SCNicknamerClient;
+import golden.scnicknamer.config.SCNicknamerConfig;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import com.mojang.authlib.GameProfile;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin (PlayerListEntry.class)
 public abstract class PlayerListEntryMixin {
     @Unique
-    SCNameLinkConfig CONFIG = AutoConfig.getConfigHolder(SCNameLinkConfig.class).getConfig();
+    SCNicknamerConfig CONFIG = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
 
     @Shadow
     @Final
@@ -40,9 +40,9 @@ public abstract class PlayerListEntryMixin {
             displayName = Text.literal(profile.getName());
         }
 
-        Text label = SpooncraftNameLinkClient.getStyledName(displayName, profile.getId(),
-                                                            profile.getName(),
-                                                            CONFIG.replacetablist, CONFIG.colourtablist);
+        Text label = SCNicknamerClient.getStyledName(displayName, profile.getId(),
+                                                     profile.getName(),
+                                                     CONFIG.replacetablist, CONFIG.colourtablist);
         cir.setReturnValue(label);
     }
 }

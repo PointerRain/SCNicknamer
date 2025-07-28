@@ -1,0 +1,21 @@
+{
+    "text.autoconfig.scnicknamer.title": "SCNicknamer",
+    "text.autoconfig.scnicknamer.option.enableMod": "Lay on wending",
+    "text.autoconfig.scnicknamer.option.apiLink": "API Link",
+    "text.autoconfig.scnicknamer.option.replacetablist": "Nicknames in the playerlist",
+    "text.autoconfig.scnicknamer.option.colourtablist": "Hue names in the playerlist",
+    "text.autoconfig.scnicknamer.option.replacenametag": "Nicknames in nametokens",
+    "text.autoconfig.scnicknamer.option.colournametag": "Hue player nametokens",
+    "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in chat",
+    "text.autoconfig.scnicknamer.option.colourchat": "Hue names in chat",
+    "text.autoconfig.scnicknamer.option.locatorbar": "Hue dots in the finder band",
+    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Fand edstarting your game after laying on.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank if unknowed.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Fand edstarting your game after wending.",
+    "text.scnicknamer.status.disabled": "SCNicknamer is off.",
+    "text.scnicknamer.status.working": "SCNicknamer has not fulcome setting up yet.",
+    "text.scnicknamer.status.fallback": "SCNicknamer could not reach the outreckoner. Using stored fallback.",
+    "text.scnicknamer.status.failure": "SCNicknamer could not reach the outreckoner or use stored fallback.",
+    "text.scnicknamer.status.success": "Loaded becomings from the outreckoner.",
+    "gui.scnicknamer.hover_nickname": "Nickname: %s"
+}

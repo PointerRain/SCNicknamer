@@ -1,7 +1,7 @@
-package golden.scnamelink.mixin.client;
+package golden.scnicknamer.client;
 
-import golden.scnamelink.DisplayMapping;
-import golden.scnamelink.SpooncraftNameLinkClient;
+import golden.scnicknamer.DisplayMapping;
+import golden.scnicknamer.SCNicknamerClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
@@ -41,10 +41,10 @@ public abstract class HoverEventMixin {
             this.tooltip.add(Text.translatable("gui.entity_tooltip.type",
                                                this.entityType.getName()));
             if (this.entityType == EntityType.PLAYER && this.name.isPresent()) {
-                DisplayMapping mapping = SpooncraftNameLinkClient.getMapping(this.uuid,
-                                                                             this.name.get().getString());
+                DisplayMapping mapping = SCNicknamerClient.getMapping(this.uuid,
+                                                                      this.name.get().getString());
                 if (mapping != null && mapping.discord_nick != null) {
-                    this.tooltip.add(Text.translatable("gui.scnamelink.hover_nickname",
+                    this.tooltip.add(Text.translatable("gui.scnicknamer.hover_nickname",
                                                        mapping.discord_nick));
                 }
             }

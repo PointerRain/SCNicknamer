@@ -1,7 +1,7 @@
-package golden.scnamelink.mixin.client;
+package golden.scnicknamer.client;
 
-import golden.scnamelink.SpooncraftNameLinkClient;
-import golden.scnamelink.config.SCNameLinkConfig;
+import golden.scnicknamer.SCNicknamerClient;
+import golden.scnicknamer.config.SCNicknamerConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.text.Text;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin (ChatHud.class)
 public class ChatHudMixin {
-    SCNameLinkConfig CONFIG = AutoConfig.getConfigHolder(SCNameLinkConfig.class).getConfig();
+    SCNicknamerConfig CONFIG = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
 
     @ModifyArgs (method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V",
                 at = @At(value = "INVOKE",
@@ -25,7 +25,7 @@ public class ChatHudMixin {
 
         Text message = args.get(1);
 
-        args.set(1, SpooncraftNameLinkClient.getStyledChat(message, CONFIG.replacechat,
-                                                           CONFIG.colourchat));
+        args.set(1, SCNicknamerClient.getStyledChat(message, CONFIG.replacechat,
+                                                    CONFIG.colourchat));
     }
 }
