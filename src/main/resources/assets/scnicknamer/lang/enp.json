@@ -17,5 +17,7 @@
     "text.scnicknamer.status.fallback": "SCNicknamer could not reach the outreckoner. Using stored fallback.",
     "text.scnicknamer.status.failure": "SCNicknamer could not reach the outreckoner or use stored fallback.",
     "text.scnicknamer.status.success": "Loaded becomings from the outreckoner.",
-    "gui.scnicknamer.hover_nickname": "Nickname: %s"
+    "gui.scnicknamer.hover_nickname": "Nickname: %s",
+    "modmenu.nameTranslation.scnicknamer": "SCNicknamer",
+    "modmenu.descriptionTranslation.scnicknamer": "Lightweight software-side nickname and hueing mod."
 }

@@ -17,5 +17,7 @@
     "text.scnicknamer.status.fallback": "SCNicknamer failed to reach the server. Usin’ cached fallback charts.",
     "text.scnicknamer.status.failure": "SCNicknamer be lost at sea — no server or fallback to be found!",
     "text.scnicknamer.status.success": "Mappings loaded from the server’s hoard.",
-    "gui.scnicknamer.hover_nickname": "Nickname: %s"
+    "gui.scnicknamer.hover_nickname": "Nickname: %s",
+    "modmenu.nameTranslation.scnicknamer": "SCNicknamer",
+    "modmenu.descriptionTranslation.scnicknamer": "Lightheft ship-side nickname and colourin' mod."
 }
