@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+import static golden.scnicknamer.GradientUtil.applyGradient;
+
 /**
  * Client-side mod initializer for the Minecraft mod "Spooncraft Name Link".
  */
@@ -89,7 +91,7 @@ public class SCNicknamerClient implements ClientModInitializer {
             MutableText newText = (MutableText) Text.of(replacedText);
             newText.setStyle(replacedStyle);
             if (true) {
-                newText = (MutableText) getGradientText(newText, new String[]{mapping.colour, "a9c9ff", "ffbbec", "ffc3a0"});
+                newText = (MutableText) applyGradient(newText, Arrays.asList(mapping.colour, "a9c9ff", "ffbbec", "ffc3a0"));
             }
 
             outputMessage.append(newText);
@@ -173,54 +175,6 @@ public class SCNicknamerClient implements ClientModInitializer {
         }, Style.EMPTY);
 
         return outputMessage;
-    }
-
-    /**
-     * Applies a gradient color effect to the given text using the specified colors.
-     * @param text The text to which the gradient effect will be applied.
-     * @param colors An array of color hex strings (without the '#' prefix) defining the gradient stops.
-     * @return A new Text object with the gradient effect applied.
-     */
-    private static Text getGradientText(Text text, String[] colors) {
-        String str = text.getString();
-        Style style = text.getStyle();
-        int length = str.length();
-
-        if (length <= 1 || colors == null || colors.length < 2) {
-            return text;
-        }
-
-        int[] colorInts = Arrays.stream(colors)
-                .mapToInt(c -> Integer.parseInt(c, 16))
-                .toArray();
-
-        MutableText result = Text.empty();
-        int segments = colorInts.length - 1;
-
-        for (int i = 0; i < length; i++) {
-            float pos = (float) i / (length - 1);
-            int seg = Math.min((int) (pos * segments), segments - 1);
-            float localRatio = (pos * segments) - seg;
-
-            int start = colorInts[seg];
-            int end = colorInts[seg + 1];
-
-            int r = interpolate((start >> 16) & 0xFF, (end >> 16) & 0xFF, localRatio);
-            int g = interpolate((start >> 8) & 0xFF, (end >> 8) & 0xFF, localRatio);
-            int b = interpolate(start & 0xFF, end & 0xFF, localRatio);
-
-            int color = (r << 16) | (g << 8) | b;
-
-            MutableText newChar = Text.literal(String.valueOf(str.charAt(i)))
-                                      .setStyle(style.withColor(color));
-            result.append(newChar);
-        }
-
-        return result;
-    }
-
-    private static int interpolate(int start, int end, float ratio) {
-        return (int) (start + (end - start) * ratio);
     }
 
     /**
