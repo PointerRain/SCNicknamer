@@ -37,7 +37,7 @@ public class TrackedWaypointMixin {
         if (uuid == null) {
             return;
         }
-        DisplayMapping mapping = SCNicknamerClient.getMapping(uuid, null);
+        DisplayMapping mapping = SCNicknamerClient.getMapping(uuid);
         if (mapping == null || mapping.colour == null || mapping.colour.isEmpty()) {
             return;
         }

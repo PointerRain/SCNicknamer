@@ -41,7 +41,6 @@ public abstract class PlayerListEntryMixin {
         }
 
         Text label = SCNicknamerClient.getStyledName(displayName, profile.getId(),
-                                                     profile.getName(),
                                                      CONFIG.replacetablist, CONFIG.colourtablist);
         cir.setReturnValue(label);
     }

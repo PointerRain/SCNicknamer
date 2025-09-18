@@ -14,7 +14,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * NameLinkAPI is a utility class responsible for fetching and caching mappings between
@@ -52,7 +54,7 @@ public class NameLinkAPI {
      * @return A list of {@code DisplayMapping} objects, either from the API or the cached file,
      * or an empty list in case of failure.
      */
-    public static List<DisplayMapping> getMappings(String source) {
+    public static HashMap<UUID, DisplayMapping> getMappings(String source) {
         status = "Working";
 
         try {
@@ -60,7 +62,7 @@ public class NameLinkAPI {
             final String jsonData = loadJsonFromUrl(source);
             LOGGER.info("Load data from url");
             // Convert String JSON into Java objects
-            final List<DisplayMapping> displayMappings = loadJsonToObjects(jsonData);
+            final HashMap<UUID, DisplayMapping> displayMappings = loadJsonToObjects(jsonData);
             LOGGER.info("Converted sting to Object");
             // Save to file as a backup
             saveJsonToFile(jsonData);
@@ -73,14 +75,14 @@ public class NameLinkAPI {
             // If an exception occurs
             try {
                 // Try loading it from the cached file
-                List<DisplayMapping> displayMappings = loadJsonFromFile();
+                HashMap<UUID, DisplayMapping> displayMappings = loadJsonFromFile();
                 status = "Fallback";
                 LOGGER.warn("Could not reach the server. Using cached fallback.");
                 return displayMappings;
             } catch (RuntimeException | IOException ex) {
                 status = "Failure";
                 LOGGER.warn("Could not reach the server or find a fallback.");
-                return new ArrayList<>(0);
+                return new HashMap<>(); // Return an empty list on failure
             }
         }
     }
@@ -167,9 +169,9 @@ public class NameLinkAPI {
      * @return A list of {@code DisplayMapping} objects parsed from the JSON string.
      * @throws IOException If an error occurs while parsing the JSON data.
      */
-    private static List<DisplayMapping> loadJsonToObjects(String jsonData) throws IOException {
+    private static HashMap<UUID, DisplayMapping> loadJsonToObjects(String jsonData) throws IOException {
         Gson gson = new Gson();
-        return gson.fromJson(jsonData, getDisplayMappingListType());
+        return gson.fromJson(jsonData, getDisplayMappingMapType());
     }
 
     /**
@@ -181,10 +183,10 @@ public class NameLinkAPI {
      * @return A list of {@code DisplayMapping} objects loaded from the cache file.
      * @throws IOException If an error occurs while reading the cache file.
      */
-    private static List<DisplayMapping> loadJsonFromFile() throws IOException {
+    private static HashMap<UUID, DisplayMapping> loadJsonFromFile() throws IOException {
         Gson gson = new Gson();
         try (Reader reader = Files.newBufferedReader(Paths.get(NameLinkAPI.CACHE_PATH))) {
-            return gson.fromJson(reader, getDisplayMappingListType());
+            return gson.fromJson(reader, getDisplayMappingMapType());
         }
     }
 
@@ -195,8 +197,8 @@ public class NameLinkAPI {
      *
      * @return The Type representing {@code List<DisplayMapping>}.
      */
-    private static Type getDisplayMappingListType() {
-        return new TypeToken<List<DisplayMapping>>() {}.getType();
+    private static Type getDisplayMappingMapType() {
+        return new TypeToken<HashMap<UUID, DisplayMapping>>() {}.getType();
     }
 
     /**

@@ -13,7 +13,9 @@ import net.minecraft.util.Formatting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Client-side mod initializer for the Minecraft mod "Spooncraft Name Link".
@@ -29,7 +31,7 @@ public class SCNicknamerClient implements ClientModInitializer {
     static SCNicknamerConfig config;
 
     // List of mappings for replacement and optional color changes
-    private static List<DisplayMapping> mappings = new ArrayList<>();
+    private static Map<UUID, DisplayMapping> mappings = Map.of();
 
     /**
      * Retrieves a mapping matching either the UUID or the name of the Minecraft player.
@@ -38,14 +40,8 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @param name The in-game name of the Minecraft player
      * @return The {@code DisplayMapping} object if found, otherwise null
      */
-    public static DisplayMapping getMapping(UUID uuid, String name) {
-        // Iterate over the mappings to find the correct match based on UUID or Minecraft name
-        for (DisplayMapping mapping : mappings) {
-            if (Objects.equals(mapping.mc_uuid, uuid) || Objects.equals(mapping.mc_name, name)) {
-                return mapping;
-            }
-        }
-        return null;
+    public static DisplayMapping getMapping(UUID uuid) {
+        return mappings.get(uuid);
     }
 
     /**
@@ -94,40 +90,22 @@ public class SCNicknamerClient implements ClientModInitializer {
     }
 
     /**
-     * Retrieves and applies the correct name mapping (if any) for a given Minecraft username or
-     * UUID.
-     * Checks the mappings list to see if the provided displayName or uuid has a corresponding
-     * mapping, and if found, applies it by optionally altering the name and color.
+     * Retrieves and applies the correct name mapping (if any) for a given UUID.
+     * Checks the mappings list to see if the provided uuid has a corresponding mapping,
+     * and if found, applies it by optionally altering the name and color.
      *
      * @param displayName   The original in-game name to be displayed
      * @param uuid          The UUID of the Minecraft player
-     * @param name          The in-game name as a Text object
      * @param replaceName   Whether to replace the name with the name defined in the mapping
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
      * @return A Text object containing the potentially modified name with appropriate styling
      */
-    public static Text getStyledName(Text displayName, UUID uuid, String name, boolean replaceName,
+    public static Text getStyledName(Text displayName, UUID uuid, boolean replaceName,
                                      boolean replaceColour) {
-        DisplayMapping mapping = getMapping(uuid, name);
-        if (mapping != null) {
-            return applyMapping(displayName, mapping, replaceName, replaceColour);
-        }
-        return displayName;
-    }
-
-    /**
-     * Retrieves and applies the correct name mapping (if any) for a given Minecraft username.
-     *
-     * @param displayName   The original in-game name to be displayed
-     * @param name          The in-game name as a Text object
-     * @param replaceName   Whether to replace the name with the name defined in the mapping
-     * @param replaceColour Whether to replace the colour with the colour defined in the mapping
-     * @return A Text object containing the potentially modified name with appropriate styling
-     * @see #getStyledName(Text, UUID, String, boolean, boolean)
-     */
-    public static Text getStyledName(Text displayName, String name, boolean replaceName,
-                                     boolean replaceColour) {
-        return getStyledName(displayName, UUID.randomUUID(), name, replaceName, replaceColour);
+        DisplayMapping mapping = getMapping(uuid);
+        return (mapping != null)
+                ? applyMapping(displayName, mapping, replaceName, replaceColour)
+                : displayName;
     }
 
     /**
@@ -149,16 +127,10 @@ public class SCNicknamerClient implements ClientModInitializer {
             MutableText newText = Text.literal(text).setStyle(style);
 
             HoverEvent event = style.getHoverEvent();
-            if (event != null) {
-
-                if (event.getAction() == HoverEvent.Action.SHOW_ENTITY) {
-                    HoverEvent.EntityContent entity = ((HoverEvent.ShowEntity) event).entity();
-
-                    newText = (MutableText) getStyledName(newText, entity.uuid,
-                                                          String.valueOf(entity.name),
-                                                          replaceName, replaceColour);
-                    newText.setStyle(newText.getStyle().withHoverEvent(event));
-                }
+            if (event != null && event.getAction() == HoverEvent.Action.SHOW_ENTITY) {
+                HoverEvent.EntityContent entity = ((HoverEvent.ShowEntity) event).entity();
+                newText = (MutableText) getStyledName(newText, entity.uuid, replaceName, replaceColour);
+                newText.setStyle(newText.getStyle().withHoverEvent(event));
             }
 
             outputMessage.append(newText);
@@ -177,7 +149,9 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @return The number of mappings retrieved.
      */
     public static int getMappings(String source) {
-        String s = (source == null || source.isEmpty()) ? "https://gwaff.uqcloud.net/api/spooncraft" : source;
+        String s = (source == null || source.isEmpty())
+                ? "https://gwaff.uqcloud.net/scnicknamer/test/hashmappings"
+                : source;
         mappings = NameLinkAPI.getMappings(s);
         return mappings.size();
     }

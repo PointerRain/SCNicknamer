@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
+import java.util.UUID;
+
 @Mixin (PlayerEntityRenderer.class)
 public abstract class PlayerEntityRendererMixin {
     @Unique
@@ -29,7 +31,7 @@ public abstract class PlayerEntityRendererMixin {
 
         PlayerEntityRenderState player = args.get(0);
         Text display_name = args.get(1);
-        Text label = SCNicknamerClient.getStyledName(display_name, player.name,
+        Text label = SCNicknamerClient.getStyledName(display_name, UUID.randomUUID(), // TODO: Fix UUID
                                                      CONFIG.replacenametag, CONFIG.colournametag);
         args.set(1, label);
     }
