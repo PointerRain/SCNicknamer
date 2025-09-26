@@ -28,12 +28,12 @@ import java.util.List;
  */
 public class NameLinkAPI {
     // The mod ID as used in logging
-    public static final String MOD_ID = "SC-Name-Link";
+    public static final String MOD_ID = "SCNicknamer";
     // Logger for outputting information to the console and log files
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     // The file path to cache the JSON data locally in case of API failure.
-    static final String CACHE_PATH = "config/spooncraft-name-link-cache.json";
+    static final String CACHE_PATH = "config/scnicknamer-cache.json";
     static final int MAX_RETRIES = 5;
     static final int BASE_DELAY_MS = 500;
 

@@ -6,6 +6,7 @@
     "ChatHudMixin",
     "ClientPlayNetworkHandlerMixin",
     "HoverEventMixin",
+    "EntityRendererStateMixin",
     "PlayerEntityRendererMixin",
     "PlayerListEntryMixin",
     "TrackedWaypointMixin"

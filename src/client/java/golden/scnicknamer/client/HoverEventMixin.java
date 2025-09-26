@@ -43,12 +43,12 @@ public abstract class HoverEventMixin {
             if (this.entityType == EntityType.PLAYER && this.name.isPresent()) {
                 DisplayMapping mapping = SCNicknamerClient.getMapping(this.uuid,
                                                                       this.name.get().getString());
-                if (mapping != null && mapping.discord_nick != null) {
+                if (mapping != null && mapping.discord_nick() != null) {
                     this.tooltip.add(Text.translatable("gui.scnicknamer.hover_nickname",
-                                                       mapping.discord_nick));
+                                                       mapping.discord_nick()));
                 }
             }
-            this.tooltip.add(Text.literal(this.uuid.toString()));
+            this.tooltip.add(Text.of(this.uuid));
         }
 
         return this.tooltip;

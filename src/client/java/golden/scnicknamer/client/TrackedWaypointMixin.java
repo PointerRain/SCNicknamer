@@ -38,10 +38,10 @@ public class TrackedWaypointMixin {
             return;
         }
         DisplayMapping mapping = SCNicknamerClient.getMapping(uuid, null);
-        if (mapping == null || mapping.colour == null || mapping.colour.isEmpty()) {
+        if (mapping == null || mapping.colour() == null || mapping.colour().isEmpty()) {
             return;
         }
-        int k = ColorHelper.withAlpha(255, Integer.parseInt(mapping.colour, 16));
+        int k = ColorHelper.withAlpha(255, Integer.parseInt(mapping.colour(), 16));
         config.color = java.util.Optional.of(k);
 
         cir.setReturnValue(config);

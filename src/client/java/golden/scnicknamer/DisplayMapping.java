@@ -1,22 +1,11 @@
 package golden.scnicknamer;
 
 import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
-public class DisplayMapping {
-    final String mc_name;
-    final UUID mc_uuid;
-    public final String discord_nick;
-    public final String colour;
+public record DisplayMapping(String mc_name, UUID mc_uuid, String discord_nick, String colour) {
 
-    public DisplayMapping(String mc_name, UUID mc_uuid, String discord_nick,
-                          String colour) {
-        this.mc_name = mc_name;
-        this.mc_uuid = mc_uuid;
-        this.discord_nick = discord_nick;
-        this.colour = colour;
-    }
-
-    @Override
+    @Override @NotNull
     public String toString() {
         return "DisplayMapping{" +
                 "mc_name='" + mc_name + '\'' +
@@ -24,5 +13,10 @@ public class DisplayMapping {
                 ", discord_nick=" + discord_nick +
                 ", colour=" + colour +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return mc_uuid != null ? mc_uuid.hashCode() : (mc_name != null ? mc_name.hashCode() : 0);
     }
 }

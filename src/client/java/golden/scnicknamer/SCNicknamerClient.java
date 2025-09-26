@@ -16,12 +16,12 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
- * Client-side mod initializer for the Minecraft mod "Spooncraft Name Link".
+ * Client-side mod initializer for the mod "Spooncraft Name Link".
  */
 public class SCNicknamerClient implements ClientModInitializer {
 
     // The mod ID as used in logging
-    static final String MOD_ID = "scnamelink";
+    static final String MOD_ID = "scnicknamer";
 
     // Logger for outputting information to the console and log files
     static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -32,16 +32,16 @@ public class SCNicknamerClient implements ClientModInitializer {
     private static List<DisplayMapping> mappings = new ArrayList<>();
 
     /**
-     * Retrieves a mapping matching either the UUID or the name of the Minecraft player.
+     * Retrieves a mapping matching either the UUID or the name of the player.
      *
-     * @param uuid The {@code UUID} of the Minecraft player
-     * @param name The in-game name of the Minecraft player
+     * @param uuid The {@code UUID} of the player
+     * @param name The in-game name of the player
      * @return The {@code DisplayMapping} object if found, otherwise null
      */
     public static DisplayMapping getMapping(UUID uuid, String name) {
         // Iterate over the mappings to find the correct match based on UUID or Minecraft name
         for (DisplayMapping mapping : mappings) {
-            if (Objects.equals(mapping.mc_uuid, uuid) || Objects.equals(mapping.mc_name, name)) {
+            if (Objects.equals(mapping.mc_uuid(), uuid) || Objects.equals(mapping.mc_name(), name)) {
                 return mapping;
             }
         }
@@ -71,14 +71,14 @@ public class SCNicknamerClient implements ClientModInitializer {
             Style replacedStyle = style;
 
             // Apply the mapping
-            if (replacedText.contains(mapping.mc_name)) {
+            if (replacedText.contains(mapping.mc_name())) {
                 // Replace the string
-                if (mapping.discord_nick != null && replaceName) {
-                    replacedText = replacedText.replace(mapping.mc_name, mapping.discord_nick);
+                if (mapping.discord_nick() != null && replaceName) {
+                    replacedText = replacedText.replace(mapping.mc_name(), mapping.discord_nick());
                 }
                 // Apply color if specified
-                if (mapping.colour != null && replaceColour) {
-                    replacedStyle = replacedStyle.withColor(Integer.parseInt(mapping.colour, 16));
+                if (mapping.colour() != null && replaceColour) {
+                    replacedStyle = replacedStyle.withColor(Integer.parseInt(mapping.colour(), 16));
                 }
             }
 
@@ -109,10 +109,9 @@ public class SCNicknamerClient implements ClientModInitializer {
     public static Text getStyledName(Text displayName, UUID uuid, String name, boolean replaceName,
                                      boolean replaceColour) {
         DisplayMapping mapping = getMapping(uuid, name);
-        if (mapping != null) {
-            return applyMapping(displayName, mapping, replaceName, replaceColour);
-        }
-        return displayName;
+        return (mapping != null)
+                ? applyMapping(displayName, mapping, replaceName, replaceColour)
+                : displayName;
     }
 
     /**
@@ -149,16 +148,12 @@ public class SCNicknamerClient implements ClientModInitializer {
             MutableText newText = Text.literal(text).setStyle(style);
 
             HoverEvent event = style.getHoverEvent();
-            if (event != null) {
-
-                if (event.getAction() == HoverEvent.Action.SHOW_ENTITY) {
-                    HoverEvent.EntityContent entity = ((HoverEvent.ShowEntity) event).entity();
-
-                    newText = (MutableText) getStyledName(newText, entity.uuid,
-                                                          String.valueOf(entity.name),
-                                                          replaceName, replaceColour);
-                    newText.setStyle(newText.getStyle().withHoverEvent(event));
-                }
+            if (event != null && event.getAction() == HoverEvent.Action.SHOW_ENTITY) {
+                HoverEvent.EntityContent entity = ((HoverEvent.ShowEntity) event).entity();
+                newText = (MutableText) getStyledName(newText, entity.uuid,
+                                                      String.valueOf(entity.name),
+                                                      replaceName, replaceColour);
+                newText.setStyle(newText.getStyle().withHoverEvent(event));
             }
 
             outputMessage.append(newText);
@@ -177,7 +172,9 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @return The number of mappings retrieved.
      */
     public static int getMappings(String source) {
-        String s = (source == null || source.isEmpty()) ? "https://gwaff.uqcloud.net/api/spooncraft" : source;
+        String s = (source == null || source.isEmpty())
+                ? "https://gwaff.uqcloud.net/scnicknamer"
+                : source;
         mappings = NameLinkAPI.getMappings(s);
         return mappings.size();
     }
@@ -188,12 +185,11 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @return A Text object containing the status of the mod
      */
     public static Text getStatusString() {
-        String status = NameLinkAPI.getStatus();
-        return switch (status) {
-            case "Success" -> Text.translatable("text.scnamelink.status.success").formatted(Formatting.WHITE);
-            case "Working" -> Text.translatable("text.scnamelink.status.working").formatted(Formatting.YELLOW);
-            case "Fallback" -> Text.translatable("text.scnamelink.status.fallback").formatted(Formatting.RED);
-            case "Failure" -> Text.translatable("text.scnamelink.status.failure").formatted(Formatting.RED, Formatting.BOLD);
+        return switch (NameLinkAPI.getStatus()) {
+            case "Success" -> Text.translatable("text.scnicknamer.status.success").formatted(Formatting.WHITE);
+            case "Working" -> Text.translatable("text.scnicknamer.status.working").formatted(Formatting.YELLOW);
+            case "Fallback" -> Text.translatable("text.scnicknamer.status.fallback").formatted(Formatting.RED);
+            case "Failure" -> Text.translatable("text.scnicknamer.status.failure").formatted(Formatting.RED, Formatting.BOLD);
             default -> Text.of(NameLinkAPI.getStatus());
         };
     }

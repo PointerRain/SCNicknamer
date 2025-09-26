@@ -7,11 +7,11 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 public class CommandManager {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(ClientCommandManager.literal("scnamelink")
+        dispatcher.register(ClientCommandManager.literal("scnicknamer")
 //            .then(ClientCommandManager.literal("reload")
 //                .executes(context -> {
 //                    SCNicknamerClient.getMappings(null);
-//                    context.getSource().sendFeedback(Text.literal("Reloaded SCNameLink mappings"));
+//                    context.getSource().sendFeedback(Text.literal("Reloaded SCNicknamer mappings"));
 //                    return 1;
 //                }))
             .then(ClientCommandManager.literal("load")

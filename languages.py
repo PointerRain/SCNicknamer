@@ -74,7 +74,7 @@ en_ud = {key: ''.join(replacements.get(char, char) for char in value)[::-1] for 
 
 toki_pona = en_au.copy()
 toki_pona.update({
-    "text.autoconfig.scnicknamer.title": "ilo nimi Supunkara",
+    "text.autoconfig.scnicknamer.title": "ilo nimi Supunkala",
     "text.autoconfig.scnicknamer.option.enableMod": "o pali e ilo",
     "text.autoconfig.scnicknamer.option.apiLink": "len API",
 
@@ -86,10 +86,10 @@ toki_pona.update({
     "text.autoconfig.scnicknamer.option.colourchat": "kule e nimi lon toki",
     "text.autoconfig.scnicknamer.option.locatorbar": "kule e ijo pi lukin lon",
 
-    "text.scnicknamer.status.disabled": "ilo nimi Supunkara li pini.",
-    "text.scnicknamer.status.working":  "ilo nimi Supunkara li awen pali.",
-    "text.scnicknamer.status.fallback": "ilo nimi Supunkara li ken ala kama jo e ilo pi lawa tomo. o pana kepeken ilo kama sina.",
-    "text.scnicknamer.status.failure":  "ilo nimi Supunkara li ken ala kama jo e ilo pi lawa tomo anu ilo kama.",
+    "text.scnicknamer.status.disabled": "ilo nimi Supunkala li pini.",
+    "text.scnicknamer.status.working":  "ilo nimi Supunkala li awen pali.",
+    "text.scnicknamer.status.fallback": "ilo nimi Supunkala li ken ala kama jo e ilo pi lawa tomo. o pana kepeken ilo kama sina.",
+    "text.scnicknamer.status.failure":  "ilo nimi Supunkala li ken ala kama jo e ilo pi lawa tomo anu ilo kama.",
     "text.scnicknamer.status.success":  "ilo li kama tan ilo pi lawa tomo.",
 
     "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "o pini musi o open sin e musi.",
@@ -98,7 +98,7 @@ toki_pona.update({
 
     "gui.scnicknamer.hover_nickname": "nimi poka: %s",
 
-    "modmenu.nameTranslation.scnicknamer": "ilo nimi Supunkara",
+    "modmenu.nameTranslation.scnicknamer": "ilo nimi Supunkala",
     "modmenu.descriptionTranslation.scnicknamer": "ilo pi nimi en kule lili",
 })
 

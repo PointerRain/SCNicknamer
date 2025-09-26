@@ -5,7 +5,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 /**
- * Stores configuration options for the Spooncraft Name Link mod.
+ * Stores configuration options for the SCNicknamer mod.
  */
 @Config (name = "scnicknamer")
 public class SCNicknamerConfig implements ConfigData {

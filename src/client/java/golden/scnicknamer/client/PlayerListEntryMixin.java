@@ -36,12 +36,12 @@ public abstract class PlayerListEntryMixin {
             return;
         }
 
-        if (displayName == null && profile.getName() != null) {
-            displayName = Text.literal(profile.getName());
+        if (displayName == null && profile.name() != null) {
+            displayName = Text.of(profile.name());
         }
 
-        Text label = SCNicknamerClient.getStyledName(displayName, profile.getId(),
-                                                     profile.getName(),
+        Text label = SCNicknamerClient.getStyledName(displayName, profile.id(),
+                                                     profile.name(),
                                                      CONFIG.replacetablist, CONFIG.colourtablist);
         cir.setReturnValue(label);
     }

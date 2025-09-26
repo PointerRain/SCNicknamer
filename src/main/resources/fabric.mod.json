@@ -3,7 +3,7 @@
 	"id": "scnicknamer",
 	"version": "${version}",
 	"name": "SCNicknamer",
-	"description": "Lightweight client-side nickname mod.",
+	"description": "Lightweight client-side nickname and colour mod.",
 	"authors": [
 		{
 			"name": "GoldenRedstone",
@@ -34,8 +34,8 @@
 		}
 	],
 	"depends": {
-		"minecraft": "^1.21.5",
-		"fabricloader": ">=${loader_version}",
+		"minecraft": "^1.21.9",
+		"fabricloader": ">=0.17",
 		"java": ">=21",
 		"fabric-api": "*",
 		"cloth-config": "*"
@@ -46,8 +46,8 @@
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.discord": "https://discord.gg/mumbo-jumbo-server-377946908783673344",
-				"modmenu.modrinth": "https://modrinth.com/mod/sc-name-link"
+				"modmenu.discord": "https://discord.gg/mumbojumbo",
+				"modmenu.modrinth": "https://modrinth.com/mod/scnicknamer"
 			}
 		}
 	}
