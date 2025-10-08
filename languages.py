@@ -9,10 +9,12 @@ en_au = {
     "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in chat",
     "text.autoconfig.scnicknamer.option.colourchat": "Colour names in chat",
     "text.autoconfig.scnicknamer.option.locatorbar": "Colour icons in the locator bar",
+    "text.autoconfig.scnicknamer.option.useWhitelist": "Use the recommended server whitelist",
 
     "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Game should be restarted after enabling.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank for Spooncraft.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Game should be restarted after changing.",
+    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "This is supplied by the data source, and is recommended for most users.",
 
     "text.scnicknamer.status.disabled": "SCNicknamer is disabled.",
     "text.scnicknamer.status.working": "SCNicknamer has not finished setting up yet.",
@@ -55,6 +57,7 @@ enp.update({
     "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in chat",
     "text.autoconfig.scnicknamer.option.colourchat": "Hue names in chat",
     "text.autoconfig.scnicknamer.option.locatorbar": "Hue dots in the finder band",
+    "text.autoconfig.scnicknamer.option.useWhitelist": "Use the outreckoner whitelist",
 
     "text.scnicknamer.status.disabled": "SCNicknamer is off.",
     "text.scnicknamer.status.working": "SCNicknamer has not fulcome setting up yet.",
@@ -65,6 +68,7 @@ enp.update({
     "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Fand edstarting your game after laying on.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank if unknowed.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Fand edstarting your game after wending.",
+    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "This is given by the data ordfrom, and is tipped for most users.",
 
     "modmenu.descriptionTranslation.scnicknamer": "Lightweight software-side nickname and hueing mod."
 })
@@ -85,6 +89,7 @@ toki_pona.update({
     "text.autoconfig.scnicknamer.option.replacechat": "nimi pi toki poka lon toki",
     "text.autoconfig.scnicknamer.option.colourchat": "kule e nimi lon toki",
     "text.autoconfig.scnicknamer.option.locatorbar": "kule e ijo pi lukin lon",
+    "text.autoconfig.scnicknamer.option.useWhitelist": "o lipu pi kulupu pona",
 
     "text.scnicknamer.status.disabled": "ilo nimi Supunkala li pini.",
     "text.scnicknamer.status.working":  "ilo nimi Supunkala li awen pali.",
@@ -95,6 +100,7 @@ toki_pona.update({
     "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "o pini musi o open sin e musi.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "o pana e ijo ala, la sina sona ala.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "o pini musi o open sin e musi.",
+    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "kama tan ilo pi lawa tomo. pona tan jan mute.",
 
     "gui.scnicknamer.hover_nickname": "nimi poka: %s",
 

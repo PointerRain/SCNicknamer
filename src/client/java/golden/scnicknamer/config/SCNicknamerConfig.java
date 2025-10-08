@@ -37,6 +37,9 @@ public class SCNicknamerConfig implements ConfigData {
     public enum WhitelistMode {
         ALL, AUTOWHITELIST, AUTOBLACKLIST, NONE
     }
-    public WhitelistMode whitelistMode = WhitelistMode.AUTOWHITELIST;
-    public boolean enableOnSingleplayer = false;
+//    public WhitelistMode whitelistMode = WhitelistMode.AUTOWHITELIST;
+
+    // Whether to use the recommended whitelist.
+    @ConfigEntry.Gui.Tooltip
+    public boolean useWhitelist = true;
 }

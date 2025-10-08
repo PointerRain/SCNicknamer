@@ -36,7 +36,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
     public void onGameJoin(GameJoinS2CPacket packet, CallbackInfo ci) {
         LOGGER.info("Game joined, current NameLinkAPI status: " + NameLinkAPI.getStatus());
         SCNicknamerClient.setServer(getServerInfo() == null ? null : getServerInfo().address);
-        LOGGER.info("Is server " + getServerInfo().address + " whitelisted? " + SCNicknamerClient.isEnabled());
+        LOGGER.info("Is server whitelisted? " + SCNicknamerClient.isEnabled());
         ChatHud chatHud = MinecraftClient.getInstance().inGameHud.getChatHud();
         if (chatHud != null && !NameLinkAPI.getStatus().equals("Success") && !NameLinkAPI.getStatus().equals("Disabled")) {
             chatHud.addMessage(SCNicknamerClient.getStatusString());

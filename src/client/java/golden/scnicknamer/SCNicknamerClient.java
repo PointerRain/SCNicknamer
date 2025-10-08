@@ -210,15 +210,25 @@ public class SCNicknamerClient implements ClientModInitializer {
         if (!config.enableMod) {
             return false;
         }
-        if (server == null || server.isEmpty()) {
-            return config.enableOnSingleplayer;
+        if (!config.useWhitelist) {
+            return true;
         }
-        return switch (config.whitelistMode) {
-            case ALL -> true;
-            case NONE -> false;
-            case AUTOWHITELIST -> whitelist.contains(server);
-            case AUTOBLACKLIST -> !blacklist.contains(server);
-        };
+        if (whitelist.isEmpty()) {
+            return true;
+        }
+        if (server == null || server.isEmpty()) {
+            return false;
+        }
+        return whitelist.contains(server);
+//        if (server == null || server.isEmpty()) {
+//            return config.enableOnSingleplayer;
+//        }
+//        return switch (config.whitelistMode) {
+//            case ALL -> true;
+//            case NONE -> false;
+//            case AUTOWHITELIST -> whitelist.contains(server);
+//            case AUTOBLACKLIST -> !blacklist.contains(server);
+//        };
     }
 
     @Override
