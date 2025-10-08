@@ -16,21 +16,27 @@ public class SCNicknamerConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 2)
     public String apiLink = "";
 
-    // Whether to replace names in the tablist using discord nicknames.
+    // Whether to replace names in the tablist using nicknames.
     public boolean replacetablist = false;
-    // Whether to colour names in the using the colour from discord.
+    // Whether to colour names using provided colours.
     public boolean colourtablist = true;
 
-    // Whether to replace names in player nametags using discord nicknames.
+    // Whether to replace names in player nametags using nicknames.
     public boolean replacenametag = false;
-    // Whether to colour names in player nametags using the colour from discord.
+    // Whether to colour names in using provided colours.
     public boolean colournametag = true;
 
-    // Whether to replace names in the chat using discord nicknames.
+    // Whether to replace names in the chat using nicknames.
     public boolean replacechat = false;
-    // Whether to colour names in the chat using the colour from discord.
+    // Whether to colour names in using provided colours.
     public boolean colourchat = true;
 
     // Whether to colour the icons in the locator bar.
     public boolean locatorbar = true;
+
+    public enum WhitelistMode {
+        ALL, AUTOWHITELIST, AUTOBLACKLIST, NONE
+    }
+    public WhitelistMode whitelistMode = WhitelistMode.AUTOWHITELIST;
+    public boolean enableOnSingleplayer = false;
 }

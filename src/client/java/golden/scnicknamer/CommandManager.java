@@ -10,7 +10,7 @@ public class CommandManager {
         dispatcher.register(ClientCommandManager.literal("scnicknamer")
 //            .then(ClientCommandManager.literal("reload")
 //                .executes(context -> {
-//                    SCNicknamerClient.getMappings(null);
+//                    SCNicknamerClient.getData(null);
 //                    context.getSource().sendFeedback(Text.literal("Reloaded SCNicknamer mappings"));
 //                    return 1;
 //                }))
@@ -18,7 +18,7 @@ public class CommandManager {
                 .then(ClientCommandManager.argument("source", StringArgumentType.greedyString())
                     .executes(context -> {
                         String source = StringArgumentType.getString(context, "source");
-                        SCNicknamerClient.getMappings(source);
+                        SCNicknamerClient.getData(source);
                         context.getSource().sendFeedback(SCNicknamerClient.getStatusString());
                         return 1;
                     }))));

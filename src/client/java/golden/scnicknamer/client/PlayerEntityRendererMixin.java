@@ -33,13 +33,12 @@ public abstract class PlayerEntityRendererMixin<AvatarlikeEntity extends PlayerL
 
         Text text = args.get(3);
 
-        if ((!CONFIG.replacenametag && !CONFIG.colournametag) || !CONFIG.enableMod) {
+        if (!SCNicknamerClient.isEnabled() || (!CONFIG.replacenametag && !CONFIG.colournametag)) {
             return;
         }
         PlayerEntity player = (PlayerEntity) ((IEntityProvider) state).spooncraft_Name_Link$getEntity();
 
         Text label = SCNicknamerClient.getStyledName(text, player.getUuid(),
-                                                     player.getStringifiedName(),
                                                      CONFIG.replacenametag, CONFIG.colournametag);
         args.set(3, label);
     }

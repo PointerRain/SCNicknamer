@@ -32,7 +32,7 @@ public abstract class PlayerListEntryMixin {
     @Inject (at = @At ("RETURN"), method = "getDisplayName", cancellable = true)
     public void replaceDisplayName(CallbackInfoReturnable<Text> cir) {
 
-        if ((!CONFIG.replacetablist && !CONFIG.colourtablist) || !CONFIG.enableMod) {
+        if (!SCNicknamerClient.isEnabled() || (!CONFIG.replacetablist && !CONFIG.colourtablist)) {
             return;
         }
 
@@ -41,7 +41,6 @@ public abstract class PlayerListEntryMixin {
         }
 
         Text label = SCNicknamerClient.getStyledName(displayName, profile.id(),
-                                                     profile.name(),
                                                      CONFIG.replacetablist, CONFIG.colourtablist);
         cir.setReturnValue(label);
     }

@@ -30,14 +30,14 @@ public class TrackedWaypointMixin {
     private void onGetConfig(CallbackInfoReturnable<Waypoint.Config> cir) {
         Waypoint.Config config = this.config;
 
-        if (!CONFIG.enableMod || !CONFIG.locatorbar) {
+        if (!SCNicknamerClient.isEnabled() || !CONFIG.locatorbar) {
             return;
         }
         UUID uuid = source.left().orElse(null);
         if (uuid == null) {
             return;
         }
-        DisplayMapping mapping = SCNicknamerClient.getMapping(uuid, null);
+        DisplayMapping mapping = SCNicknamerClient.getMapping(uuid);
         if (mapping == null || mapping.colour() == null || mapping.colour().isEmpty()) {
             return;
         }

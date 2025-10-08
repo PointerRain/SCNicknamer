@@ -14,11 +14,12 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * NameLinkAPI is a utility class responsible for fetching and caching mappings between
- * Minecraft names/UUIDs and Discord nicknames from an external API.
+ * Minecraft names/UUIDs and nicknames from an external API.
  * <p>
  * The class handles retrieving the mappings either from a remote server or, if that fails, from a
  * cached
@@ -49,10 +50,10 @@ public class NameLinkAPI {
      * entirely ({@code "Failure"}).
      *
      * @param source The URL of the API to fetch the JSON data from.
-     * @return A list of {@code DisplayMapping} objects, either from the API or the cached file,
+     * @return A {@code ServerResponse} object, either from the API or the cached file,
      * or an empty list in case of failure.
      */
-    public static List<DisplayMapping> getMappings(String source) {
+    public static ServerResponse getData(String source) {
         status = "Working";
 
         try {
@@ -60,8 +61,8 @@ public class NameLinkAPI {
             final String jsonData = loadJsonFromUrl(source);
             LOGGER.info("Load data from url");
             // Convert String JSON into Java objects
-            final List<DisplayMapping> displayMappings = loadJsonToObjects(jsonData);
-            LOGGER.info("Converted sting to Object");
+            final ServerResponse displayMappings = loadJsonToObjects(jsonData);
+            LOGGER.info("Converted string to Object");
             // Save to file as a backup
             saveJsonToFile(jsonData);
             LOGGER.info("Saved the data to {}", NameLinkAPI.CACHE_PATH);
@@ -73,14 +74,14 @@ public class NameLinkAPI {
             // If an exception occurs
             try {
                 // Try loading it from the cached file
-                List<DisplayMapping> displayMappings = loadJsonFromFile();
+                ServerResponse displayMappings = loadJsonFromFile();
                 status = "Fallback";
                 LOGGER.warn("Could not reach the server. Using cached fallback.");
                 return displayMappings;
             } catch (RuntimeException | IOException ex) {
                 status = "Failure";
                 LOGGER.warn("Could not reach the server or find a fallback.");
-                return new ArrayList<>(0);
+                return new ServerResponse(new HashMap<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             }
         }
     }
@@ -161,42 +162,41 @@ public class NameLinkAPI {
     }
 
     /**
-     * Converts a JSON string into a list of {@code DisplayMapping} objects using Gson.
+     * Converts a JSON string into a {@code ServerResponse} object using Gson.
      *
      * @param jsonData The JSON data as a string.
-     * @return A list of {@code DisplayMapping} objects parsed from the JSON string.
+     * @return A {@code ServerResponse} object parsed from the JSON string.
      * @throws IOException If an error occurs while parsing the JSON data.
      */
-    private static List<DisplayMapping> loadJsonToObjects(String jsonData) throws IOException {
+    private static ServerResponse loadJsonToObjects(String jsonData) throws IOException {
         Gson gson = new Gson();
-        return gson.fromJson(jsonData, getDisplayMappingListType());
+        return gson.fromJson(jsonData, getResponseType());
     }
 
     /**
-     * Loads the JSON data from the local cache file and converts it into a list of
-     * {@code DisplayMapping}
-     * objects.<br>
+     * Loads the JSON data from the local cache file and converts it into a {@code ServerResponse}
+     * object.<br>
      * This method is used as a fallback if the API request fails.
      *
-     * @return A list of {@code DisplayMapping} objects loaded from the cache file.
+     * @return A {@code ServerResponse} object loaded from the cache file.
      * @throws IOException If an error occurs while reading the cache file.
      */
-    private static List<DisplayMapping> loadJsonFromFile() throws IOException {
+    private static ServerResponse loadJsonFromFile() throws IOException {
         Gson gson = new Gson();
         try (Reader reader = Files.newBufferedReader(Paths.get(NameLinkAPI.CACHE_PATH))) {
-            return gson.fromJson(reader, getDisplayMappingListType());
+            return gson.fromJson(reader, getResponseType());
         }
     }
 
     /**
-     * Helper method to get the Type of {@code List<DisplayMapping>} for Gson parsing.
+     * Helper method to get the Type of {@code ServerResponse} for Gson parsing.
      * This method returns the type information required by Gson to correctly deserialize
-     * a list of {@code DisplayMapping} objects.
+     * a {@code ServerResponse} object.
      *
-     * @return The Type representing {@code List<DisplayMapping>}.
+     * @return The Type representing {@code ServerResponse}.
      */
-    private static Type getDisplayMappingListType() {
-        return new TypeToken<List<DisplayMapping>>() {}.getType();
+    private static Type getResponseType() {
+        return new TypeToken<ServerResponse>() {}.getType();
     }
 
     /**

@@ -21,36 +21,35 @@ import java.util.*;
 public class SCNicknamerClient implements ClientModInitializer {
 
     // The mod ID as used in logging
-    static final String MOD_ID = "scnicknamer";
+    private static final String MOD_ID = "scnicknamer";
 
     // Logger for outputting information to the console and log files
-    static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    static SCNicknamerConfig config;
+    private static SCNicknamerConfig config;
 
     // List of mappings for replacement and optional color changes
-    private static List<DisplayMapping> mappings = new ArrayList<>();
+    private static HashMap<UUID, DisplayMapping> mappings = new HashMap<>();
+
+    private static List<String> whitelist = new ArrayList<>();
+    private static List<String> blacklist = new ArrayList<>();
+    private static List<String> messages = new ArrayList<>();
+
+    private static String server;
 
     /**
      * Retrieves a mapping matching either the UUID or the name of the player.
      *
      * @param uuid The {@code UUID} of the player
-     * @param name The in-game name of the player
      * @return The {@code DisplayMapping} object if found, otherwise null
      */
-    public static DisplayMapping getMapping(UUID uuid, String name) {
-        // Iterate over the mappings to find the correct match based on UUID or Minecraft name
-        for (DisplayMapping mapping : mappings) {
-            if (Objects.equals(mapping.mc_uuid(), uuid) || Objects.equals(mapping.mc_name(), name)) {
-                return mapping;
-            }
-        }
-        return null;
+    public static DisplayMapping getMapping(UUID uuid) {
+        return mappings.get(uuid);
     }
 
     /**
      * Applies the mapping to a given message. It optionally replaces the Minecraft name with
-     * the Discord nickname and applies the colour styling.
+     * the nickname and applies the colour styling.
      *
      * @param message       The original in-game message or name
      * @param mapping       The {@code DisplayMapping} object containing the name and color mapping
@@ -73,8 +72,8 @@ public class SCNicknamerClient implements ClientModInitializer {
             // Apply the mapping
             if (replacedText.contains(mapping.mc_name())) {
                 // Replace the string
-                if (mapping.discord_nick() != null && replaceName) {
-                    replacedText = replacedText.replace(mapping.mc_name(), mapping.discord_nick());
+                if (mapping.nickname() != null && replaceName) {
+                    replacedText = replacedText.replace(mapping.mc_name(), mapping.nickname());
                 }
                 // Apply color if specified
                 if (mapping.colour() != null && replaceColour) {
@@ -101,32 +100,16 @@ public class SCNicknamerClient implements ClientModInitializer {
      *
      * @param displayName   The original in-game name to be displayed
      * @param uuid          The UUID of the Minecraft player
-     * @param name          The in-game name as a Text object
      * @param replaceName   Whether to replace the name with the name defined in the mapping
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
      * @return A Text object containing the potentially modified name with appropriate styling
      */
-    public static Text getStyledName(Text displayName, UUID uuid, String name, boolean replaceName,
+    public static Text getStyledName(Text displayName, UUID uuid, boolean replaceName,
                                      boolean replaceColour) {
-        DisplayMapping mapping = getMapping(uuid, name);
+        DisplayMapping mapping = getMapping(uuid);
         return (mapping != null)
                 ? applyMapping(displayName, mapping, replaceName, replaceColour)
                 : displayName;
-    }
-
-    /**
-     * Retrieves and applies the correct name mapping (if any) for a given Minecraft username.
-     *
-     * @param displayName   The original in-game name to be displayed
-     * @param name          The in-game name as a Text object
-     * @param replaceName   Whether to replace the name with the name defined in the mapping
-     * @param replaceColour Whether to replace the colour with the colour defined in the mapping
-     * @return A Text object containing the potentially modified name with appropriate styling
-     * @see #getStyledName(Text, UUID, String, boolean, boolean)
-     */
-    public static Text getStyledName(Text displayName, String name, boolean replaceName,
-                                     boolean replaceColour) {
-        return getStyledName(displayName, UUID.randomUUID(), name, replaceName, replaceColour);
     }
 
     /**
@@ -151,7 +134,6 @@ public class SCNicknamerClient implements ClientModInitializer {
             if (event != null && event.getAction() == HoverEvent.Action.SHOW_ENTITY) {
                 HoverEvent.EntityContent entity = ((HoverEvent.ShowEntity) event).entity();
                 newText = (MutableText) getStyledName(newText, entity.uuid,
-                                                      String.valueOf(entity.name),
                                                       replaceName, replaceColour);
                 newText.setStyle(newText.getStyle().withHoverEvent(event));
             }
@@ -171,11 +153,15 @@ public class SCNicknamerClient implements ClientModInitializer {
      *               used.
      * @return The number of mappings retrieved.
      */
-    public static int getMappings(String source) {
+    public static int getData(String source) {
         String s = (source == null || source.isEmpty())
-                ? "https://gwaff.uqcloud.net/scnicknamer"
+                ? "https://gwaff.uqcloud.net/scnicknamer/"
                 : source;
-        mappings = NameLinkAPI.getMappings(s);
+        ServerResponse data = NameLinkAPI.getData(s);
+        mappings = data.mappings() != null ? data.mappings() : new HashMap<>();
+        whitelist = data.whitelist() != null ? data.whitelist() : new ArrayList<>();
+        blacklist = data.blacklist() != null ? data.blacklist() : new ArrayList<>();
+        messages = data.messages() != null ? data.messages() : new ArrayList<>();
         return mappings.size();
     }
 
@@ -186,11 +172,44 @@ public class SCNicknamerClient implements ClientModInitializer {
      */
     public static Text getStatusString() {
         return switch (NameLinkAPI.getStatus()) {
-            case "Success" -> Text.translatable("text.scnicknamer.status.success").formatted(Formatting.WHITE);
-            case "Working" -> Text.translatable("text.scnicknamer.status.working").formatted(Formatting.YELLOW);
-            case "Fallback" -> Text.translatable("text.scnicknamer.status.fallback").formatted(Formatting.RED);
-            case "Failure" -> Text.translatable("text.scnicknamer.status.failure").formatted(Formatting.RED, Formatting.BOLD);
+            case "Success" ->
+                    Text.translatable("text.scnicknamer.status.success").formatted(Formatting.WHITE);
+            case "Working" ->
+                    Text.translatable("text.scnicknamer.status.working").formatted(Formatting.YELLOW);
+            case "Fallback" ->
+                    Text.translatable("text.scnicknamer.status.fallback").formatted(Formatting.RED);
+            case "Failure" ->
+                    Text.translatable("text.scnicknamer.status.failure").formatted(Formatting.RED
+                            , Formatting.BOLD);
             default -> Text.of(NameLinkAPI.getStatus());
+        };
+    }
+
+    /**
+     * Sets the current server address.
+     * @param currentServer The address of the current server or null/empty if not connected to a server.
+     */
+    public static void setServer(String currentServer) {
+        server = currentServer;
+    }
+
+    /**
+     * Checks if the mod is enabled based on the configuration and server lists.
+     *
+     * @return {@code true} if the mod is enabled for the given server, {@code false} otherwise.
+     */
+    public static boolean isEnabled() {
+        if (!config.enableMod) {
+            return false;
+        }
+        if (server == null || server.isEmpty()) {
+            return config.enableOnSingleplayer;
+        }
+        return switch (config.whitelistMode) {
+            case ALL -> true;
+            case NONE -> false;
+            case AUTOWHITELIST -> whitelist.contains(server);
+            case AUTOBLACKLIST -> !blacklist.contains(server);
         };
     }
 
@@ -199,7 +218,7 @@ public class SCNicknamerClient implements ClientModInitializer {
         AutoConfig.register(SCNicknamerConfig.class, Toml4jConfigSerializer::new);
         config = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
 
-        final int count = getMappings(config.apiLink);
+        final int count = getData(config.apiLink);
         if (count > 0) {
             LOGGER.info("{} initialised with {} mappings", MOD_ID, mappings.size());
         } else {
