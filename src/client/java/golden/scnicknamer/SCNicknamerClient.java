@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+import static golden.scnicknamer.GradientUtil.applyGradient;
+
 /**
  * Client-side mod initializer for the mod "Spooncraft Name Link".
  */
@@ -66,24 +68,30 @@ public class SCNicknamerClient implements ClientModInitializer {
 
         MutableText outputMessage = Text.empty();
         message.visit((style, text) -> {
+            if (!text.contains(mapping.mc_name())) {
+                outputMessage.append(Text.literal(text).setStyle(style));
+                return Optional.empty();  // Continue visiting
+            }
+
             String replacedText = text;
             Style replacedStyle = style;
 
             // Apply the mapping
-            if (replacedText.contains(mapping.mc_name())) {
-                // Replace the string
-                if (mapping.nickname() != null && replaceName) {
-                    replacedText = replacedText.replace(mapping.mc_name(), mapping.nickname());
-                }
-                // Apply color if specified
-                if (mapping.colour() != null && replaceColour) {
-                    replacedStyle = replacedStyle.withColor(Integer.parseInt(mapping.colour(), 16));
-                }
+            // Replace the string
+            if (mapping.nickname() != null && replaceName) {
+                replacedText = replacedText.replace(mapping.mc_name(), mapping.nickname());
+            }
+            // Apply color if specified
+            if (mapping.colour() != null && replaceColour) {
+                replacedStyle = replacedStyle.withColor(Integer.parseInt(mapping.colour(), 16));
             }
 
             // Create new MutableText with the display string and style
             MutableText newText = (MutableText) Text.of(replacedText);
             newText.setStyle(replacedStyle);
+            if (mapping.colours() != null && mapping.colours().length > 1 && replaceColour) {
+                newText = (MutableText) applyGradient(newText, List.of(mapping.colours()));
+            }
             outputMessage.append(newText);
 
             return Optional.empty();  // Continue visiting

@@ -3,7 +3,8 @@ package golden.scnicknamer;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 
-public record DisplayMapping(String mc_name, UUID mc_uuid, String nickname, String colour) {
+public record DisplayMapping(String mc_name, UUID mc_uuid,
+                             String nickname, String colour, String[] colours) {
 
     @Override @NotNull
     public String toString() {
