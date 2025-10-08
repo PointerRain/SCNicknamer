@@ -133,6 +133,37 @@ pirate.update({
     "modmenu.descriptionTranslation.scnicknamer": "Lightheft ship-side nickname and colourin' mod.",
 })
 
+id_id = en_au.copy()
+id_id.update({
+    "text.autoconfig.scnicknamer.title": "SCNicknamer",
+    "text.autoconfig.scnicknamer.option.enableMod": "Aktifkan Mod",
+    "text.autoconfig.scnicknamer.option.apiLink": "API Link",
+    "text.autoconfig.scnicknamer.option.replacetablist": "Nama panggilan di daftar tab",
+    "text.autoconfig.scnicknamer.option.colourtablist": "Warma nama di daftar tab",
+    "text.autoconfig.scnicknamer.option.replacenametag": "Nama panggilan di papan nama",
+    "text.autoconfig.scnicknamer.option.colournametag": "Warna nama di papan nama",
+    "text.autoconfig.scnicknamer.option.replacechat": "Nama panggilan dalam percakapan",
+    "text.autoconfig.scnicknamer.option.colourchat": "Warna nama dalam percakapan",
+    "text.autoconfig.scnicknamer.option.locatorbar": "Warna ikon di bar lokasi",
+    "text.autoconfig.scnicknamer.option.useWhitelist": "Gunakan whitelist server yang direkomendasikan",
+
+    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Permaninan harus dimulai ulang setelah diaktifkan.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Biarkan kosong untuk Spooncraft.",
+    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Permainan harus dimulai ulang setelah melakukan perubahan.",
+    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "Ini disediakan oleh sumber data, dan direkomendasikan untuk sebagian besar pengguna.",
+
+    "text.scnicknamer.status.disabled": "SCNicknamer dinonaktifkan.",
+    "text.scnicknamer.status.working": "SCNicknamer belum selesai melakukan pengaturan.",
+    "text.scnicknamer.status.fallback": "SCNicknamer tidak dapat mencapai server. Menggunakan cadangan yang di-cache.",
+    "text.scnicknamer.status.failure": "SCNicknamer tidak dapat mencapai server atau menemukan cadangan.",
+    "text.scnicknamer.status.success": "Pemetaan yang dimuat dari server.",
+
+    "gui.scnicknamer.hover_nickname": "Nama panggilan: %s",
+
+    "modmenu.nameTranslation.scnicknamer": "SCNicknamer",
+    "modmenu.descriptionTranslation.scnicknamer": "Mod nama panggilan dan warna sisi klien yang ringan."
+})
+
 
 languages = {
     'en_au': en_au,
@@ -143,7 +174,8 @@ languages = {
     'enp':   enp,
     'en_ud': en_ud,
     'tok':   toki_pona,
-    'en_pt': pirate
+    'en_pt': pirate,
+    'id_id': id_id
 }
 
 
