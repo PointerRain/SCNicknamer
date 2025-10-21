@@ -203,10 +203,21 @@ public class SCNicknamerClient implements ClientModInitializer {
 
     /**
      * Checks if the mod is enabled based on the configuration and server lists.
+     * Uses the currently set server.
      *
-     * @return {@code true} if the mod is enabled for the given server, {@code false} otherwise.
+     * @return Whether the mod should be enabled on the current server.
+     * @see #isEnabled(String srv)
      */
     public static boolean isEnabled() {
+        return isEnabled(server);
+    }
+
+    /**
+     * Checks if the mod is enabled on the given server based on the configuration and server lists.
+     * @param srv The server to check for whitelist on.
+     * @return Whether the mod should be enabled.
+     */
+    public static boolean isEnabled(String srv) {
         if (!config.enableMod) {
             return false;
         }
@@ -216,38 +227,42 @@ public class SCNicknamerClient implements ClientModInitializer {
         if (whitelist.isEmpty()) {
             return true;
         }
-        if (server == null || server.isEmpty()) {
+        if (srv == null || srv.isEmpty()) {
             return false;
         }
-        return whitelist.contains(server);
-//        if (server == null || server.isEmpty()) {
+        return whitelist.contains(srv);
+//        if (srv == null || srv.isEmpty()) {
 //            return config.enableOnSingleplayer;
 //        }
 //        return switch (config.whitelistMode) {
 //            case ALL -> true;
 //            case NONE -> false;
-//            case AUTOWHITELIST -> whitelist.contains(server);
-//            case AUTOBLACKLIST -> !blacklist.contains(server);
+//            case AUTOWHITELIST -> whitelist.contains(srv);
+//            case AUTOBLACKLIST -> !blacklist.contains(srv);
 //        };
     }
 
     @Override
     public void onInitializeClient() {
         AutoConfig.register(SCNicknamerConfig.class, Toml4jConfigSerializer::new);
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> CommandManager.register(dispatcher));
         config = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
-
-        final int count = getData(config.apiLink);
-        if (count > 0) {
-            LOGGER.info("{} initialised with {} mappings", MOD_ID, mappings.size());
-        } else {
-            LOGGER.warn("{} initialised with NO mappings found", MOD_ID);
-        }
 
         if (!config.enableMod) {
             NameLinkAPI.disableMod();
             LOGGER.warn("Mod disabled.");
             return;
         }
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> CommandManager.register(dispatcher));
+
+        Thread loadThread = new Thread(() -> {
+            final int count = getData(config.apiLink);
+            if (count > 0) {
+                LOGGER.info("{} initialised with {} mappings", MOD_ID, mappings.size());
+            } else {
+                LOGGER.warn("{} initialised with NO mappings found", MOD_ID);
+            }
+        });
+        loadThread.setDaemon(true);
+        loadThread.start();
     }
 }
