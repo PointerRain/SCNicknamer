@@ -18,7 +18,7 @@ import java.util.*;
 import static golden.scnicknamer.GradientUtil.applyGradient;
 
 /**
- * Client-side mod initializer for the mod "Spooncraft Name Link".
+ * Client-side mod initialiser for the mod "Spooncraft Name Link".
  */
 public class SCNicknamerClient implements ClientModInitializer {
 
@@ -30,8 +30,8 @@ public class SCNicknamerClient implements ClientModInitializer {
 
     private static SCNicknamerConfig config;
 
-    // List of mappings for replacement and optional color changes
-    private static HashMap<UUID, DisplayMapping> mappings = new HashMap<>();
+    // List of mappings for replacement and optional colour changes
+    private static Map<UUID, DisplayMapping> mappings = new HashMap<>();
 
     private static List<String> whitelist = new ArrayList<>();
     private static List<String> blacklist = new ArrayList<>();
@@ -54,11 +54,11 @@ public class SCNicknamerClient implements ClientModInitializer {
      * the nickname and applies the colour styling.
      *
      * @param message       The original in-game message or name
-     * @param mapping       The {@code DisplayMapping} object containing the name and color mapping
+     * @param mapping       The {@code DisplayMapping} object containing the name and colour mapping
      *                      details
      * @param replaceName   Whether to replace the name with the name defined in the mapping
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
-     * @return A new MutableText object with the mapping applied (replacements and color changes)
+     * @return A new MutableText object with the mapping applied (replacements and colour changes)
      */
     static MutableText applyMapping(Text message, DisplayMapping mapping,
                                     boolean replaceName, boolean replaceColour) {
@@ -81,7 +81,7 @@ public class SCNicknamerClient implements ClientModInitializer {
             if (mapping.nickname() != null && replaceName) {
                 replacedText = replacedText.replace(mapping.mc_name(), mapping.nickname());
             }
-            // Apply color if specified
+            // Apply colour if specified
             if (mapping.colour() != null && replaceColour) {
                 replacedStyle = replacedStyle.withColor(Integer.parseInt(mapping.colour(), 16));
             }
@@ -104,7 +104,7 @@ public class SCNicknamerClient implements ClientModInitializer {
      * Retrieves and applies the correct name mapping (if any) for a given Minecraft username or
      * UUID.
      * Checks the mappings list to see if the provided displayName or uuid has a corresponding
-     * mapping, and if found, applies it by optionally altering the name and color.
+     * mapping, and if found, applies it by optionally altering the name and colour.
      *
      * @param displayName   The original in-game name to be displayed
      * @param uuid          The UUID of the Minecraft player
@@ -127,7 +127,7 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @param message       The original in-game message or name
      * @param replaceName   Whether to replace the name with the name defined in the mapping
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
-     * @return A new MutableText object with the mapping applied (replacements and color changes)
+     * @return A new MutableText object with the mapping applied (replacements and colour changes)
      */
     public static Text getStyledChat(Text message, boolean replaceName, boolean replaceColour) {
         if (message == null || message.getString().isEmpty()) {
@@ -231,15 +231,6 @@ public class SCNicknamerClient implements ClientModInitializer {
             return false;
         }
         return whitelist.contains(srv);
-//        if (srv == null || srv.isEmpty()) {
-//            return config.enableOnSingleplayer;
-//        }
-//        return switch (config.whitelistMode) {
-//            case ALL -> true;
-//            case NONE -> false;
-//            case AUTOWHITELIST -> whitelist.contains(srv);
-//            case AUTOBLACKLIST -> !blacklist.contains(srv);
-//        };
     }
 
     @Override
