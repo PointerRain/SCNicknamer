@@ -19,6 +19,7 @@
     "text.scnicknamer.status.fallback": "SCNicknamer tidak dapat mencapai server. Menggunakan cadangan yang di-cache.",
     "text.scnicknamer.status.failure": "SCNicknamer tidak dapat mencapai server atau menemukan cadangan.",
     "text.scnicknamer.status.success": "Pemetaan yang dimuat dari server.",
+    "text.scnicknamer.status.unknown": "SCNicknamer status is unknown.",
     "gui.scnicknamer.hover_nickname": "Nama panggilan: %s",
     "modmenu.nameTranslation.scnicknamer": "SCNicknamer",
     "modmenu.descriptionTranslation.scnicknamer": "Mod nama panggilan dan warna sisi klien yang ringan."

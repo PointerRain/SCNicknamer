@@ -19,6 +19,7 @@
     "text.scnicknamer.status.fallback": "ilo nimi Supunkala li ken ala kama jo e ilo pi lawa tomo. o pana kepeken ilo kama sina.",
     "text.scnicknamer.status.failure": "ilo nimi Supunkala li ken ala kama jo e ilo pi lawa tomo anu ilo kama.",
     "text.scnicknamer.status.success": "ilo li kama tan ilo pi lawa tomo.",
+    "text.scnicknamer.status.unknown": "SCNicknamer status is unknown.",
     "gui.scnicknamer.hover_nickname": "nimi poka: %s",
     "modmenu.nameTranslation.scnicknamer": "ilo nimi Supunkala",
     "modmenu.descriptionTranslation.scnicknamer": "ilo pi nimi en kule lili"

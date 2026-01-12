@@ -105,3 +105,29 @@ publishing {
         // retrieving dependencies.
     }
 }
+
+def pythonExe = project.hasProperty('pythonExecutable') ? project.property('pythonExecutable') : 'python'
+
+tasks.register('generateLanguages', Exec) {
+    group = 'build'
+    description = 'Run languages.py to generate language JSON files.'
+
+    workingDir = projectDir
+    commandLine = [pythonExe, 'languages.py'] as List<String>
+
+    inputs.file('languages.py')
+    outputs.dir('src/main/resources/assets/scnicknamer/lang')
+
+    doFirst {
+        println "Running languages.py using '${pythonExe}'..."
+    }
+}
+
+tasks.named('processResources') {
+    dependsOn tasks.named('generateLanguages')
+}
+
+tasks.named('sourcesJar') {
+    dependsOn tasks.named('generateLanguages')
+    inputs.dir('src/main/resources')
+}
