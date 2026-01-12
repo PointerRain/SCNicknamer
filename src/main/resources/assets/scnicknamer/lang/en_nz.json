@@ -19,6 +19,7 @@
     "text.scnicknamer.status.fallback": "SCNicknamer could not reach the server. Using cached fallback.",
     "text.scnicknamer.status.failure": "SCNicknamer could not reach the server or find a fallback.",
     "text.scnicknamer.status.success": "Loaded mappings from the server.",
+    "text.scnicknamer.status.unknown": "SCNicknamer status is unknown.",
     "gui.scnicknamer.hover_nickname": "Nickname: %s",
     "modmenu.nameTranslation.scnicknamer": "SCNicknamer",
     "modmenu.descriptionTranslation.scnicknamer": "Lightweight client-side nickname and colour mod."

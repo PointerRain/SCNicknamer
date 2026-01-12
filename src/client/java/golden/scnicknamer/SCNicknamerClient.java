@@ -13,7 +13,12 @@ import net.minecraft.util.Formatting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 import static golden.scnicknamer.GradientUtil.applyGradient;
 
@@ -180,16 +185,17 @@ public class SCNicknamerClient implements ClientModInitializer {
      */
     public static Text getStatusString() {
         return switch (NameLinkAPI.getStatus()) {
-            case "Success" ->
+            case UNKNOWN -> Text.translatable("text.scnicknamer.status.unknown").formatted(Formatting.GRAY);
+            case SUCCESS ->
                     Text.translatable("text.scnicknamer.status.success").formatted(Formatting.WHITE);
-            case "Working" ->
+            case WORKING ->
                     Text.translatable("text.scnicknamer.status.working").formatted(Formatting.YELLOW);
-            case "Fallback" ->
+            case FALLBACK ->
                     Text.translatable("text.scnicknamer.status.fallback").formatted(Formatting.RED);
-            case "Failure" ->
+            case FAILURE ->
                     Text.translatable("text.scnicknamer.status.failure").formatted(Formatting.RED
                             , Formatting.BOLD);
-            default -> Text.of(NameLinkAPI.getStatus());
+            case DISABLED -> Text.translatable("text.scnicknamer.status.disabled").formatted(Formatting.DARK_GRAY);
         };
     }
 

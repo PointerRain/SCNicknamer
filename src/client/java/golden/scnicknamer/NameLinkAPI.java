@@ -5,7 +5,11 @@ import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -13,9 +17,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * NameLinkAPI is a utility class responsible for fetching and caching mappings between
@@ -39,22 +40,22 @@ public class NameLinkAPI {
     static final int BASE_DELAY_MS = 500;
 
     // Tracks the current status of the API fetch and caching process
-    static String status = "Working";
+    static FetchStatus status = FetchStatus.WORKING;
 
     /**
      * Fetches the display name mappings from the external API. If an error occurs during the
      * process, it attempts to load the mappings from the cached local file.
      * <p>
      * The status is updated to reflect whether the data was successfully fetched from the API
-     * ({@code "Success"}), retrieved from the cache ({@code "Fallback"}), or if the process failed
-     * entirely ({@code "Failure"}).
+     * ({@code SUCCESS}), retrieved from the cache ({@code FALLBACK}), or if the process failed
+     * entirely ({@code FAILURE}).
      *
      * @param source The URL of the API to fetch the JSON data from.
      * @return A {@code ServerResponse} object, either from the API or the cached file,
-     * or an empty list in case of failure.
+     * or {@code ServerResponse.EMPTY} in case of failure.
      */
     public static ServerResponse getData(String source) {
-        status = "Working";
+        status = FetchStatus.WORKING;
 
         try {
             // Load JSON from URL
@@ -67,7 +68,7 @@ public class NameLinkAPI {
             saveJsonToFile(jsonData);
             LOGGER.info("Saved the data to {}", NameLinkAPI.CACHE_PATH);
 
-            status = "Success";
+            status = FetchStatus.SUCCESS;
             return displayMappings;
 
         } catch (RuntimeException | IOException | URISyntaxException e) {
@@ -75,13 +76,15 @@ public class NameLinkAPI {
             try {
                 // Try loading it from the cached file
                 ServerResponse displayMappings = loadJsonFromFile();
-                status = "Fallback";
-                LOGGER.warn("Could not reach the server. Using cached fallback.");
+                status = FetchStatus.FALLBACK;
+                LOGGER.warn("Could not reach the server. Using cached fallback.\nError: {}", e.getMessage());
                 return displayMappings;
             } catch (RuntimeException | IOException ex) {
-                status = "Failure";
+                status = FetchStatus.FAILURE;
                 LOGGER.warn("Could not reach the server or find a fallback.");
-                return new ServerResponse(new HashMap<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+                LOGGER.error("Error the first: {}", e.getMessage());
+                LOGGER.error("Error the second: {}", ex.getMessage());
+                return ServerResponse.EMPTY;
             }
         }
     }
@@ -140,7 +143,7 @@ public class NameLinkAPI {
                 }
             } finally {
                 if (conn != null) {
-                    conn.disconnect(); // Always disconnect to free resources
+                    conn.disconnect();
                 }
             }
         }
@@ -202,15 +205,16 @@ public class NameLinkAPI {
     /**
      * Returns the current status of the API fetching and caching process.
      * The possible statuses are:<br>
-     * - {@code "Working"}: The process is ongoing.<br>
-     * - {@code "Success":} Data was successfully fetched from the API.<br>
-     * - {@code "Fallback"}: Data was loaded from the cache.<br>
-     * - {@code "Failure"}: Both API and cache loading failed.<br>
-     * - {@code "Disabled"}: The mod is disabled in the configuration.
+     * - {@code UNKNOWN}: The initial state before any operation.<br>
+     * - {@code WORKING}: The process is ongoing.<br>
+     * - {@code SUCCESS} Data was successfully fetched from the API.<br>
+     * - {@code FALLBACK}: Data was loaded from the cache.<br>
+     * - {@code FAILURE}: Both API and cache loading failed.<br>
+     * - {@code DISABLED}: The mod is disabled in the configuration.
      *
      * @return The current status as a string.
      */
-    public static String getStatus() {
+    public static FetchStatus getStatus() {
         return status;
     }
 
@@ -219,6 +223,18 @@ public class NameLinkAPI {
      * This prevents messages from showing up when joining a server.
      */
     public static void disableMod() {
-        status = "Disabled";
+        status = FetchStatus.DISABLED;
+    }
+
+    /**
+     * Enum representing the various statuses of the API fetching and caching process.
+     */
+    public enum FetchStatus {
+        UNKNOWN,
+        WORKING,
+        SUCCESS,
+        FALLBACK,
+        FAILURE,
+        DISABLED
     }
 }

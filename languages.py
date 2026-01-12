@@ -21,6 +21,7 @@ en_au = {
     "text.scnicknamer.status.fallback": "SCNicknamer could not reach the server. Using cached fallback.",
     "text.scnicknamer.status.failure": "SCNicknamer could not reach the server or find a fallback.",
     "text.scnicknamer.status.success": "Loaded mappings from the server.",
+    "text.scnicknamer.status.unknown": "SCNicknamer status is unknown.",
 
     "gui.scnicknamer.hover_nickname": "Nickname: %s",
 
@@ -64,6 +65,7 @@ enp.update({
     "text.scnicknamer.status.fallback": "SCNicknamer could not reach the outreckoner. Using stored fallback.",
     "text.scnicknamer.status.failure": "SCNicknamer could not reach the outreckoner or use stored fallback.",
     "text.scnicknamer.status.success": "Loaded becomings from the outreckoner.",
+    "text.scnicknamer.status.unknown": "SCNicknamer standing is unknowned.",
 
     "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Fand edstarting your game after laying on.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank if unknowed.",
@@ -125,6 +127,7 @@ pirate.update({
     "text.scnicknamer.status.fallback": "SCNicknamer failed to reach the server. Usin’ cached fallback charts.",
     "text.scnicknamer.status.failure": "SCNicknamer be lost at sea — no server or fallback to be found!",
     "text.scnicknamer.status.success": "Mappings loaded from the server’s hoard.",
+    "text.scnicknamer.status.unknown": "SCNicknamer be in unknown waters.",
 
     "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Restart the game after hoistin’ this option.",
     "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave this map blank if ye don’t know the way.",

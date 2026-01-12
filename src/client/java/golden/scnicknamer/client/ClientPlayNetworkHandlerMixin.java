@@ -7,6 +7,8 @@ import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -14,11 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-
-@Mixin (ClientPlayNetworkHandler.class)
+@Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin {
 
     // The mod ID as used in logging
@@ -34,11 +33,11 @@ public abstract class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "onGameJoin(Lnet/minecraft/network/packet/s2c/play/GameJoinS2CPacket;)V", at = @At("TAIL"))
     public void onGameJoin(GameJoinS2CPacket packet, CallbackInfo ci) {
-        LOGGER.info("Game joined, current NameLinkAPI status: " + NameLinkAPI.getStatus());
+        LOGGER.info("Game joined, current NameLinkAPI status: {}", NameLinkAPI.getStatus());
         SCNicknamerClient.setServer(getServerInfo() == null ? null : getServerInfo().address);
-        LOGGER.info("Is server whitelisted? " + SCNicknamerClient.isEnabled());
+        LOGGER.info("Is server whitelisted? {}", SCNicknamerClient.isEnabled());
         ChatHud chatHud = MinecraftClient.getInstance().inGameHud.getChatHud();
-        if (chatHud != null && !NameLinkAPI.getStatus().equals("Success") && !NameLinkAPI.getStatus().equals("Disabled")) {
+        if (chatHud != null && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.SUCCESS && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.DISABLED) {
             chatHud.addMessage(SCNicknamerClient.getStatusString());
         }
     }
