@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -30,7 +30,7 @@ loom {
     splitEnvironmentSourceSets()
 
     mods {
-        "scnicknamer" {
+        register("scnicknamer") {
             sourceSet sourceSets.main
             sourceSet sourceSets.client
         }
@@ -48,18 +48,21 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Modmenu
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
     // ClothConfig
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}") {
         exclude(group: "net.fabricmc.fabric-api")
+        transitive = false
     }
 }
 
 processResources {
-	inputs.property "version", project.version
+    filteringCharset = 'UTF-8'
+
+    inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
 		expand "version": inputs.properties.version
@@ -115,8 +118,8 @@ tasks.register('generateLanguages', Exec) {
     workingDir = projectDir
     commandLine = [pythonExe, 'languages.py'] as List<String>
 
-    inputs.file('languages.py')
-    outputs.dir('src/main/resources/assets/scnicknamer/lang')
+    inputs.file layout.projectDirectory.file('languages.py')
+    outputs.dir layout.projectDirectory.dir('src/main/resources/assets/scnicknamer/lang')
 
     doFirst {
         println "Running languages.py using '${pythonExe}'..."

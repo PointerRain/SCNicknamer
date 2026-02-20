@@ -18,7 +18,7 @@
 		"sources": "https://github.com/GoldenRedstone/SCNicknamer",
 		"issues": "https://github.com/PointerRain/SCNicknamer/issues",
 		"modrinth": "https://modrinth.com/mod/sc-name-link",
-		"discord": "https://discord.gg/mumbo-jumbo-server-377946908783673344"
+		"discord": "https://discord.gg/yPafK59A8b"
 	},
 	"license": "CC0-1.0",
 	"environment": "client",
@@ -46,7 +46,7 @@
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.discord": "https://discord.gg/mumbojumbo",
+				"modmenu.discord": "https://discord.gg/yPafK59A8b",
 				"modmenu.modrinth": "https://modrinth.com/mod/scnicknamer"
 			}
 		}

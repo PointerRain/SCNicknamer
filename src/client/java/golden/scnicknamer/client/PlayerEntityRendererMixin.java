@@ -1,11 +1,10 @@
 package golden.scnicknamer.client;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import golden.scnicknamer.SCNicknamerClient;
 import golden.scnicknamer.config.SCNicknamerConfig;
 import golden.scnicknamer.interfaces.IEntityProvider;
-
 import me.shedaniel.autoconfig.AutoConfig;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.network.ClientPlayerLikeEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
@@ -28,7 +27,9 @@ public abstract class PlayerEntityRendererMixin<AvatarlikeEntity extends PlayerL
 
     @ModifyArgs (method = "renderLabelIfPresent(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/render/state/CameraRenderState;)V",
             at = @At (value = "INVOKE",
-                    target = "net/minecraft/client/render/command/OrderedRenderCommandQueue.submitLabel(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Vec3d;ILnet/minecraft/text/Text;ZIDLnet/minecraft/client/render/state/CameraRenderState;)V"))
+                    target = "Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;submitLabel" +
+                            "(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Vec3d;" +
+                            "ILnet/minecraft/text/Text;ZIDLnet/minecraft/client/render/state/CameraRenderState;)V"))
     protected void renderLabelIfPresent(Args args, @Local (argsOnly = true) PlayerEntityRenderState state) {
 
         Text text = args.get(3);
@@ -43,8 +44,8 @@ public abstract class PlayerEntityRendererMixin<AvatarlikeEntity extends PlayerL
         args.set(3, label);
     }
 
-
-    @Inject (method = "updateRenderState*", at = @At("TAIL"))
+    @Inject(method = "updateRenderState(Lnet/minecraft/entity/PlayerLikeEntity;" +
+            "Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;F)V", at = @At("TAIL"))
     public void populateEntityInState(AvatarlikeEntity entity, PlayerEntityRenderState state, float f, CallbackInfo ci) {
         ((IEntityProvider) state).spooncraft_Name_Link$setEntity(entity);
     }
