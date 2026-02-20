@@ -5,11 +5,11 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.minecraft.text.HoverEvent;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,16 +65,16 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
      * @return A new MutableText object with the mapping applied (replacements and colour changes)
      */
-    static MutableText applyMapping(Text message, DisplayMapping mapping,
+    static MutableComponent applyMapping(Component message, DisplayMapping mapping,
                                     boolean replaceName, boolean replaceColour) {
         if (message == null || message.getString().isEmpty() || mapping == null) {
-            return (MutableText) message;
+            return (MutableComponent) message;
         }
 
-        MutableText outputMessage = Text.empty();
+        MutableComponent outputMessage = Component.empty();
         message.visit((style, text) -> {
             if (!text.contains(mapping.mc_name())) {
-                outputMessage.append(Text.literal(text).setStyle(style));
+                outputMessage.append(Component.literal(text).setStyle(style));
                 return Optional.empty();  // Continue visiting
             }
 
@@ -92,10 +92,10 @@ public class SCNicknamerClient implements ClientModInitializer {
             }
 
             // Create new MutableText with the display string and style
-            MutableText newText = (MutableText) Text.of(replacedText);
+            MutableComponent newText = (MutableComponent) Component.nullToEmpty(replacedText);
             newText.setStyle(replacedStyle);
             if (mapping.colours() != null && mapping.colours().length > 1 && replaceColour) {
-                newText = (MutableText) applyGradient(newText, List.of(mapping.colours()));
+                newText = (MutableComponent) applyGradient(newText, List.of(mapping.colours()));
             }
             outputMessage.append(newText);
 
@@ -117,7 +117,7 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
      * @return A Text object containing the potentially modified name with appropriate styling
      */
-    public static Text getStyledName(Text displayName, UUID uuid, boolean replaceName,
+    public static Component getStyledName(Component displayName, UUID uuid, boolean replaceName,
                                      boolean replaceColour) {
         DisplayMapping mapping = getMapping(uuid);
         return (mapping != null)
@@ -134,19 +134,19 @@ public class SCNicknamerClient implements ClientModInitializer {
      * @param replaceColour Whether to replace the colour with the colour defined in the mapping
      * @return A new MutableText object with the mapping applied (replacements and colour changes)
      */
-    public static Text getStyledChat(Text message, boolean replaceName, boolean replaceColour) {
+    public static Component getStyledChat(Component message, boolean replaceName, boolean replaceColour) {
         if (message == null || message.getString().isEmpty()) {
-            return Text.empty();
+            return Component.empty();
         }
 
-        MutableText outputMessage = Text.empty();
+        MutableComponent outputMessage = Component.empty();
         message.visit((style, text) -> {
-            MutableText newText = Text.literal(text).setStyle(style);
+            MutableComponent newText = Component.literal(text).setStyle(style);
 
             HoverEvent event = style.getHoverEvent();
-            if (event != null && event.getAction() == HoverEvent.Action.SHOW_ENTITY) {
-                HoverEvent.EntityContent entity = ((HoverEvent.ShowEntity) event).entity();
-                newText = (MutableText) getStyledName(newText, entity.uuid,
+            if (event != null && event.action() == HoverEvent.Action.SHOW_ENTITY) {
+                HoverEvent.EntityTooltipInfo entity = ((HoverEvent.ShowEntity) event).entity();
+                newText = (MutableComponent) getStyledName(newText, entity.uuid,
                                                       replaceName, replaceColour);
                 newText.setStyle(newText.getStyle().withHoverEvent(event));
             }
@@ -183,19 +183,16 @@ public class SCNicknamerClient implements ClientModInitializer {
      *
      * @return A Text object containing the status of the mod
      */
-    public static Text getStatusString() {
+    public static Component getStatusString() {
         return switch (NameLinkAPI.getStatus()) {
-            case UNKNOWN -> Text.translatable("text.scnicknamer.status.unknown").formatted(Formatting.GRAY);
-            case SUCCESS ->
-                    Text.translatable("text.scnicknamer.status.success").formatted(Formatting.WHITE);
-            case WORKING ->
-                    Text.translatable("text.scnicknamer.status.working").formatted(Formatting.YELLOW);
-            case FALLBACK ->
-                    Text.translatable("text.scnicknamer.status.fallback").formatted(Formatting.RED);
-            case FAILURE ->
-                    Text.translatable("text.scnicknamer.status.failure").formatted(Formatting.RED
-                            , Formatting.BOLD);
-            case DISABLED -> Text.translatable("text.scnicknamer.status.disabled").formatted(Formatting.DARK_GRAY);
+            case UNKNOWN -> Component.translatable("text.scnicknamer.status.unknown").withStyle(ChatFormatting.GRAY);
+            case SUCCESS -> Component.translatable("text.scnicknamer.status.success").withStyle(ChatFormatting.WHITE);
+            case WORKING -> Component.translatable("text.scnicknamer.status.working").withStyle(ChatFormatting.YELLOW);
+            case FALLBACK -> Component.translatable("text.scnicknamer.status.fallback").withStyle(ChatFormatting.RED);
+            case FAILURE -> Component.translatable("text.scnicknamer.status.failure").withStyle(ChatFormatting.RED
+                    , ChatFormatting.BOLD);
+            case DISABLED ->
+                    Component.translatable("text.scnicknamer.status.disabled").withStyle(ChatFormatting.DARK_GRAY);
         };
     }
 

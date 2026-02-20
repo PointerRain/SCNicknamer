@@ -2,9 +2,9 @@ package golden.scnicknamer.client;
 
 import golden.scnicknamer.DisplayMapping;
 import golden.scnicknamer.SCNicknamerClient;
-import net.minecraft.entity.EntityType;
-import net.minecraft.text.HoverEvent;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.world.entity.EntityType;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,38 +18,38 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Mixin (HoverEvent.EntityContent.class)
+@Mixin(HoverEvent.EntityTooltipInfo.class)
 public abstract class HoverEventMixin {
     @Final
     @Shadow
     public UUID uuid;
     @Final
     @Shadow
-    public Optional<Text> name;
+    public Optional<Component> name;
     @Final
     @Shadow
-    public EntityType<?> entityType;
+    public EntityType<?> type;
     @Shadow
     @Nullable
-    private List<Text> tooltip;
+    private List<Component> linesCache;
 
-    @Inject (method = "asTooltip()Ljava/util/List;", at = @At ("HEAD"))
-    public @Nullable List<Text> asTooltip(CallbackInfoReturnable<List<Text>> cir) {
-        if (this.tooltip == null) {
-            this.tooltip = new ArrayList<>();
-            this.name.ifPresent(this.tooltip::add);
-            this.tooltip.add(Text.translatable("gui.entity_tooltip.type",
-                                               this.entityType.getName()));
-            if (this.entityType == EntityType.PLAYER && this.name.isPresent()) {
+    @Inject(method = "getTooltipLines()Ljava/util/List;", at = @At("HEAD"))
+    public @Nullable List<Component> asTooltip(CallbackInfoReturnable<List<Component>> cir) {
+        if (this.linesCache == null) {
+            this.linesCache = new ArrayList<>();
+            this.name.ifPresent(this.linesCache::add);
+            this.linesCache.add(Component.translatable("gui.entity_tooltip.type",
+                    this.type.getDescription()));
+            if (this.type == EntityType.PLAYER && this.name.isPresent()) {
                 DisplayMapping mapping = SCNicknamerClient.getMapping(this.uuid);
                 if (mapping != null && mapping.nickname() != null) {
-                    this.tooltip.add(Text.translatable("gui.scnicknamer.hover_nickname",
+                    this.linesCache.add(Component.translatable("gui.scnicknamer.hover_nickname",
                                                        mapping.nickname()));
                 }
             }
-            this.tooltip.add(Text.of(this.uuid));
+            this.linesCache.add(Component.translationArg(this.uuid));
         }
 
-        return this.tooltip;
+        return this.linesCache;
     }
 }

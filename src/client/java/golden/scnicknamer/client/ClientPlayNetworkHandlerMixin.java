@@ -2,11 +2,11 @@ package golden.scnicknamer.client;
 
 import golden.scnicknamer.NameLinkAPI;
 import golden.scnicknamer.SCNicknamerClient;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.network.protocol.game.ClientboundLoginPacket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin {
 
     // The mod ID as used in logging
@@ -29,15 +29,15 @@ public abstract class ClientPlayNetworkHandlerMixin {
     private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Shadow
-    public abstract ServerInfo getServerInfo();
+    public abstract ServerData getServerData();
 
-    @Inject(method = "onGameJoin(Lnet/minecraft/network/packet/s2c/play/GameJoinS2CPacket;)V", at = @At("TAIL"))
-    public void onGameJoin(GameJoinS2CPacket packet, CallbackInfo ci) {
+    @Inject(method = "handleLogin(Lnet/minecraft/network/protocol/game/ClientboundLoginPacket;)V", at = @At("TAIL"))
+    public void onGameJoin(ClientboundLoginPacket packet, CallbackInfo ci) {
         LOGGER.info("Game joined, current NameLinkAPI status: {}", NameLinkAPI.getStatus());
-        SCNicknamerClient.setServer(getServerInfo() == null ? null : getServerInfo().address);
+        SCNicknamerClient.setServer(getServerData() == null ? null : getServerData().ip);
         LOGGER.info("Is server whitelisted? {}", SCNicknamerClient.isEnabled());
-        ChatHud chatHud = MinecraftClient.getInstance().inGameHud.getChatHud();
-        if (chatHud != null && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.SUCCESS && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.DISABLED) {
+        ChatComponent chatHud = Minecraft.getInstance().gui.getChat();
+        if (NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.SUCCESS && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.DISABLED) {
             chatHud.addMessage(SCNicknamerClient.getStatusString());
         }
     }

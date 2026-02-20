@@ -1,6 +1,6 @@
 package golden.scnicknamer.interfaces;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 public interface IEntityProvider {
     Entity spooncraft_Name_Link$getEntity();

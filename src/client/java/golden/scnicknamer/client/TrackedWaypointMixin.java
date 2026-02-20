@@ -5,10 +5,13 @@ import golden.scnicknamer.DisplayMapping;
 import golden.scnicknamer.SCNicknamerClient;
 import golden.scnicknamer.config.SCNicknamerConfig;
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraft.util.math.ColorHelper;
-import net.minecraft.world.waypoint.TrackedWaypoint;
-import net.minecraft.world.waypoint.Waypoint;
-import org.spongepowered.asm.mixin.*;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.waypoints.TrackedWaypoint;
+import net.minecraft.world.waypoints.Waypoint;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -21,19 +24,19 @@ public class TrackedWaypointMixin {
     SCNicknamerConfig CONFIG = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
     @Shadow
     @Final
-    protected Either<UUID, String> source;
+    protected Either<UUID, String> identifier;
     @Shadow
     @Final
-    private Waypoint.Config config;
+    private Waypoint.Icon icon;
 
-    @Inject (method = "getConfig", at = @At ("RETURN"), cancellable = true)
-    private void onGetConfig(CallbackInfoReturnable<Waypoint.Config> cir) {
-        Waypoint.Config config = this.config;
+    @Inject(method = "icon", at = @At("RETURN"), cancellable = true)
+    private void onGetConfig(CallbackInfoReturnable<Waypoint.Icon> cir) {
+        Waypoint.Icon config = this.icon;
 
         if (!SCNicknamerClient.isEnabled() || !CONFIG.locatorbar) {
             return;
         }
-        UUID uuid = source.left().orElse(null);
+        UUID uuid = identifier.left().orElse(null);
         if (uuid == null) {
             return;
         }
@@ -41,7 +44,7 @@ public class TrackedWaypointMixin {
         if (mapping == null || mapping.colour() == null || mapping.colour().isEmpty()) {
             return;
         }
-        int k = ColorHelper.withAlpha(255, Integer.parseInt(mapping.colour(), 16));
+        int k = ARGB.color(255, Integer.parseInt(mapping.colour(), 16));
         config.color = java.util.Optional.of(k);
 
         cir.setReturnValue(config);

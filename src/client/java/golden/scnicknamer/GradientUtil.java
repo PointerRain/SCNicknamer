@@ -1,8 +1,8 @@
 package golden.scnicknamer;
 
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class GradientUtil {
      * @param colours An array of colours in integer format (0xRRGGBB).
      * @return A new Text object with the gradient applied.
      */
-    public static Text applyGradient(Text text, int[] colours) {
+    public static Component applyGradient(Component text, int[] colours) {
         String str = text.getString();
         Style style = text.getStyle();
         int length = str.length();
@@ -28,10 +28,10 @@ public class GradientUtil {
             return text;
         }
         if (length == 1 || colours.length == 1) {    // Single character or single colour
-            return Text.literal(str).setStyle(style.withColor(colours[0]));
+            return Component.literal(str).setStyle(style.withColor(colours[0]));
         }
 
-        MutableText result = Text.empty();
+        MutableComponent result = Component.empty();
         int segments = colours.length - 1;
 
         for (int i = 0; i < length; i++) {
@@ -40,7 +40,7 @@ public class GradientUtil {
             float localRatio = pos * segments - seg;
 
             int colour = interpolateColours(colours[seg], colours[seg + 1], localRatio);
-            result.append(Text.literal(String.valueOf(str.charAt(i))).setStyle(style.withColor(colour)));
+            result.append(Component.literal(String.valueOf(str.charAt(i))).setStyle(style.withColor(colour)));
         }
         return result;
     }
@@ -51,9 +51,9 @@ public class GradientUtil {
      * @param text      The text to apply the gradient to.
      * @param hexColours A list of colours in hex string format.
      * @return A new Text object with the gradient applied.
-     * @see #applyGradient(Text, int[])
+     * @see #applyGradient(Component, int[])
      */
-    public static Text applyGradient(Text text, List<String> hexColours) {
+    public static Component applyGradient(Component text, List<String> hexColours) {
         int[] colourInts = hexColours.stream()
                 .mapToInt(c -> Integer.parseInt(c, 16))
                 .toArray();
