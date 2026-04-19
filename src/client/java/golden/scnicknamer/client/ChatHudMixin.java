@@ -17,10 +17,15 @@ public class ChatHudMixin {
     private static final SCNicknamerConfig CONFIG = AutoConfig.getConfigHolder(SCNicknamerConfig.class).getConfig();
 
     @ModifyArgs(method = "addMessage(Lnet/minecraft/network/chat/Component;" +
-            "Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
+            "Lnet/minecraft/network/chat/MessageSignature;" +
+            "Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;" +
+            "Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V",
                 at = @At(value = "INVOKE",
-                        target = "Lnet/minecraft/client/GuiMessage;<init>(ILnet/minecraft/network/chat/Component;" +
-                                "Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V"))
+                        target = "Lnet/minecraft/client/multiplayer/chat/GuiMessage;<init>" +
+                                "(ILnet/minecraft/network/chat/Component;" +
+                                "Lnet/minecraft/network/chat/MessageSignature;" +
+                                "Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;" +
+                                "Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V"))
     public void onReceivingMessages(Args args) {
 
         if ((!SCNicknamerClient.isEnabled() || !CONFIG.replacechat && !CONFIG.colourchat)) {

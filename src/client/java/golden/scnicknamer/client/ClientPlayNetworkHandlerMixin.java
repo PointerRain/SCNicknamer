@@ -38,7 +38,8 @@ public abstract class ClientPlayNetworkHandlerMixin {
         LOGGER.info("Is server whitelisted? {}", SCNicknamerClient.isEnabled());
         ChatComponent chatHud = Minecraft.getInstance().gui.getChat();
         if (NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.SUCCESS && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.DISABLED) {
-            chatHud.addMessage(SCNicknamerClient.getStatusString());
+//            chatHud.addMessage(SCNicknamerClient.getStatusString());
+            chatHud.addClientSystemMessage(SCNicknamerClient.getStatusString());
         }
     }
 }

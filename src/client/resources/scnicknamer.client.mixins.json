@@ -5,9 +5,9 @@
   "client": [
     "ChatHudMixin",
     "ClientPlayNetworkHandlerMixin",
-    "HoverEventMixin",
+    "EntityRendererMixin",
     "EntityRendererStateMixin",
-    "PlayerEntityRendererMixin",
+    "HoverEventMixin",
     "PlayerListEntryMixin",
     "TrackedWaypointMixin"
   ],
