@@ -1,20 +1,20 @@
 en_au = {
-    "text.autoconfig.scnicknamer.title": "SCNicknamer",
-    "text.autoconfig.scnicknamer.option.enableMod": "Enable Mod",
-    "text.autoconfig.scnicknamer.option.apiLink": "API Link",
-    "text.autoconfig.scnicknamer.option.replacetablist": "Nicknames in the tablist",
-    "text.autoconfig.scnicknamer.option.colourtablist": "Colour names in the tablist",
-    "text.autoconfig.scnicknamer.option.replacenametag": "Nicknames in nametags",
-    "text.autoconfig.scnicknamer.option.colournametag": "Colour player nametags",
-    "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in chat",
-    "text.autoconfig.scnicknamer.option.colourchat": "Colour names in chat",
-    "text.autoconfig.scnicknamer.option.locatorbar": "Colour icons in the locator bar",
-    "text.autoconfig.scnicknamer.option.useWhitelist": "Use the recommended server whitelist",
+    "config.scnicknamer.title": "SCNicknamer",
+    "config.scnicknamer.option.enableMod": "Enable Mod",
+    "config.scnicknamer.option.apiLink": "API Link",
+    "config.scnicknamer.option.replacetablist": "Nicknames in the tablist",
+    "config.scnicknamer.option.colourtablist": "Colour names in the tablist",
+    "config.scnicknamer.option.replacenametag": "Nicknames in nametags",
+    "config.scnicknamer.option.colournametag": "Colour player nametags",
+    "config.scnicknamer.option.replacechat": "Nicknames in chat",
+    "config.scnicknamer.option.colourchat": "Colour names in chat",
+    "config.scnicknamer.option.locatorbar": "Colour icons in the locator bar",
+    "config.scnicknamer.option.useWhitelist": "Use the recommended server whitelist",
 
-    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Game should be restarted after enabling.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank for Spooncraft.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Game should be restarted after changing.",
-    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "This is supplied by the data source, and is recommended for most users.",
+    "config.scnicknamer.option.enableMod.tooltip": "Game should be restarted after enabling.",
+    "config.scnicknamer.option.apiLink.tooltip0": "Leave blank for Spooncraft.",
+    "config.scnicknamer.option.apiLink.tooltip1": "Game should be restarted after changing.",
+    "config.scnicknamer.option.useWhitelist.tooltip": "This is supplied by the data source, and is recommended for most users.",
 
     "text.scnicknamer.status.disabled": "SCNicknamer is disabled.",
     "text.scnicknamer.status.working": "SCNicknamer has not finished setting up yet.",
@@ -31,10 +31,10 @@ en_au = {
 
 en_us = en_au.copy()
 en_us.update({
-    "text.autoconfig.scnicknamer.option.colourtablist": "Color names in the tablist",
-    "text.autoconfig.scnicknamer.option.colournametag": "Color player nametags",
-    "text.autoconfig.scnicknamer.option.colourchat": "Color names in chat",
-    "text.autoconfig.scnicknamer.option.locatorbar": "Color icons in the locator bar",
+    "config.scnicknamer.option.colourtablist": "Color names in the tablist",
+    "config.scnicknamer.option.colournametag": "Color player nametags",
+    "config.scnicknamer.option.colourchat": "Color names in chat",
+    "config.scnicknamer.option.locatorbar": "Color icons in the locator bar",
 
     "modmenu.descriptionTranslation.scnicknamer": "Lightweight client-side nickname and color mod.",
 })
@@ -50,15 +50,15 @@ en_ca.update({})
 
 enp = en_au.copy()
 enp.update({
-    "text.autoconfig.scnicknamer.option.enableMod": "Lay on wending",
-    "text.autoconfig.scnicknamer.option.replacetablist": "Nicknames in the playerlist",
-    "text.autoconfig.scnicknamer.option.colourtablist": "Hue names in the playerlist",
-    "text.autoconfig.scnicknamer.option.replacenametag": "Nicknames in nametokens",
-    "text.autoconfig.scnicknamer.option.colournametag": "Hue player nametokens",
-    "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in chat",
-    "text.autoconfig.scnicknamer.option.colourchat": "Hue names in chat",
-    "text.autoconfig.scnicknamer.option.locatorbar": "Hue dots in the finder band",
-    "text.autoconfig.scnicknamer.option.useWhitelist": "Use the outreckoner whitelist",
+    "config.scnicknamer.option.enableMod": "Lay on wending",
+    "config.scnicknamer.option.replacetablist": "Nicknames in the playerlist",
+    "config.scnicknamer.option.colourtablist": "Hue names in the playerlist",
+    "config.scnicknamer.option.replacenametag": "Nicknames in nametokens",
+    "config.scnicknamer.option.colournametag": "Hue player nametokens",
+    "config.scnicknamer.option.replacechat": "Nicknames in chat",
+    "config.scnicknamer.option.colourchat": "Hue names in chat",
+    "config.scnicknamer.option.locatorbar": "Hue dots in the finder band",
+    "config.scnicknamer.option.useWhitelist": "Use the outreckoner whitelist",
 
     "text.scnicknamer.status.disabled": "SCNicknamer is off.",
     "text.scnicknamer.status.working": "SCNicknamer has not fulcome setting up yet.",
@@ -67,10 +67,10 @@ enp.update({
     "text.scnicknamer.status.success": "Loaded becomings from the outreckoner.",
     "text.scnicknamer.status.unknown": "SCNicknamer standing is unknowned.",
 
-    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Fand edstarting your game after laying on.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave blank if unknowed.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Fand edstarting your game after wending.",
-    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "This is given by the data ordfrom, and is tipped for most users.",
+    "config.scnicknamer.option.enableMod.tooltip": "Fand edstarting your game after laying on.",
+    "config.scnicknamer.option.apiLink.tooltip0": "Leave blank if unknowed.",
+    "config.scnicknamer.option.apiLink.tooltip1": "Fand edstarting your game after wending.",
+    "config.scnicknamer.option.useWhitelist.tooltip": "This is given by the data ordfrom, and is tipped for most users.",
 
     "modmenu.descriptionTranslation.scnicknamer": "Lightweight software-side nickname and hueing mod."
 })
@@ -81,28 +81,29 @@ en_ud = {key: ''.join(replacements.get(char, char) for char in value)[::-1] for 
 toki_pona = en_au.copy()
 toki_pona.update({
     "text.autoconfig.scnicknamer.title": "ilo nimi Supunkala",
-    "text.autoconfig.scnicknamer.option.enableMod": "o pali e ilo",
-    "text.autoconfig.scnicknamer.option.apiLink": "len API",
+    "config.scnicknamer.option.enableMod": "o pali e ilo",
+    "config.scnicknamer.option.apiLink": "len API",
 
-    "text.autoconfig.scnicknamer.option.replacetablist": "nimi pi toki poka lon palisa lipu",
-    "text.autoconfig.scnicknamer.option.colourtablist": "kule e nimi lon palisa",
-    "text.autoconfig.scnicknamer.option.replacenametag": "nimi pi toki poka lon nimi lipu",
-    "text.autoconfig.scnicknamer.option.colournametag": "kule e nimi pi jan",
-    "text.autoconfig.scnicknamer.option.replacechat": "nimi pi toki poka lon toki",
-    "text.autoconfig.scnicknamer.option.colourchat": "kule e nimi lon toki",
-    "text.autoconfig.scnicknamer.option.locatorbar": "kule e ijo pi lukin lon",
-    "text.autoconfig.scnicknamer.option.useWhitelist": "o lipu pi kulupu pona",
+    "config.scnicknamer.option.replacetablist": "nimi pi toki poka lon palisa lipu",
+    "config.scnicknamer.option.colourtablist": "kule e nimi lon palisa",
+    "config.scnicknamer.option.replacenametag": "nimi pi toki poka lon nimi lipu",
+    "config.scnicknamer.option.colournametag": "kule e nimi pi jan",
+    "config.scnicknamer.option.replacechat": "nimi pi toki poka lon toki",
+    "config.scnicknamer.option.colourchat": "kule e nimi lon toki",
+    "config.scnicknamer.option.locatorbar": "kule e ijo pi lukin lon",
+    "config.scnicknamer.option.useWhitelist": "o lipu pi kulupu pona",
 
     "text.scnicknamer.status.disabled": "ilo nimi Supunkala li pini.",
     "text.scnicknamer.status.working":  "ilo nimi Supunkala li awen pali.",
     "text.scnicknamer.status.fallback": "ilo nimi Supunkala li ken ala kama jo e ilo pi lawa tomo. o pana kepeken ilo kama sina.",
     "text.scnicknamer.status.failure":  "ilo nimi Supunkala li ken ala kama jo e ilo pi lawa tomo anu ilo kama.",
     "text.scnicknamer.status.success":  "ilo li kama tan ilo pi lawa tomo.",
+    "text.scnicknamer.status.unknown": "ilo nimi Supunkala li sona ala.",
 
-    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "o pini musi o open sin e musi.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "o pana e ijo ala, la sina sona ala.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "o pini musi o open sin e musi.",
-    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "kama tan ilo pi lawa tomo. pona tan jan mute.",
+    "config.scnicknamer.option.enableMod.tooltip": "o pini musi o open sin e musi.",
+    "config.scnicknamer.option.apiLink.tooltip0": "o pana e ijo ala, la sina sona ala.",
+    "config.scnicknamer.option.apiLink.tooltip1": "o pini musi o open sin e musi.",
+    "config.scnicknamer.option.useWhitelist.tooltip": "kama tan ilo pi lawa tomo. pona tan jan mute.",
 
     "gui.scnicknamer.hover_nickname": "nimi poka: %s",
 
@@ -112,15 +113,15 @@ toki_pona.update({
 
 pirate = en_au.copy()
 pirate.update({
-    "text.autoconfig.scnicknamer.option.enableMod": "Hoist the Mod",
-    "text.autoconfig.scnicknamer.option.apiLink": "API Map o' Treasure",
-    "text.autoconfig.scnicknamer.option.replacetablist": "Use Nicknames in the Crew List",
-    "text.autoconfig.scnicknamer.option.colourtablist": "Colour Names in the Crew List",
-    "text.autoconfig.scnicknamer.option.replacenametag": "Show Nicknames in Name Banners",
-    "text.autoconfig.scnicknamer.option.colournametag": "Colour the Name Banners o' the Crew",
-    "text.autoconfig.scnicknamer.option.replacechat": "Nicknames in the Pirate Chatter",
-    "text.autoconfig.scnicknamer.option.colourchat": "Colour Names in the Pirate Chatter",
-    "text.autoconfig.scnicknamer.option.locatorbar": "Colour Dots in the Locator bar",
+    "config.scnicknamer.option.enableMod": "Hoist the Mod",
+    "config.scnicknamer.option.apiLink": "API Map o' Treasure",
+    "config.scnicknamer.option.replacetablist": "Use Nicknames in the Crew List",
+    "config.scnicknamer.option.colourtablist": "Colour Names in the Crew List",
+    "config.scnicknamer.option.replacenametag": "Show Nicknames in Name Banners",
+    "config.scnicknamer.option.colournametag": "Colour the Name Banners o' the Crew",
+    "config.scnicknamer.option.replacechat": "Nicknames in the Pirate Chatter",
+    "config.scnicknamer.option.colourchat": "Colour Names in the Pirate Chatter",
+    "config.scnicknamer.option.locatorbar": "Colour Dots in the Locator bar",
 
     "text.scnicknamer.status.disabled": "SCNicknamer be struck down n’ disabled.",
     "text.scnicknamer.status.working": "SCNicknamer be still settin' sail fer setup.",
@@ -129,9 +130,9 @@ pirate.update({
     "text.scnicknamer.status.success": "Mappings loaded from the server’s hoard.",
     "text.scnicknamer.status.unknown": "SCNicknamer be in unknown waters.",
 
-    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Restart the game after hoistin’ this option.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Leave this map blank if ye don’t know the way.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Restart the game after chartin’ a new map.",
+    "config.scnicknamer.option.enableMod.tooltip": "Restart the game after hoistin’ this option.",
+    "config.scnicknamer.option.apiLink.tooltip0": "Leave this map blank if ye don’t know the way.",
+    "config.scnicknamer.option.apiLink.tooltip1": "Restart the game after chartin’ a new map.",
 
     "modmenu.descriptionTranslation.scnicknamer": "Lightheft ship-side nickname and colourin' mod.",
 })
@@ -139,21 +140,21 @@ pirate.update({
 id_id = en_au.copy()
 id_id.update({
     "text.autoconfig.scnicknamer.title": "SCNicknamer",
-    "text.autoconfig.scnicknamer.option.enableMod": "Aktifkan Mod",
-    "text.autoconfig.scnicknamer.option.apiLink": "API Link",
-    "text.autoconfig.scnicknamer.option.replacetablist": "Nama panggilan di daftar tab",
-    "text.autoconfig.scnicknamer.option.colourtablist": "Warma nama di daftar tab",
-    "text.autoconfig.scnicknamer.option.replacenametag": "Nama panggilan di papan nama",
-    "text.autoconfig.scnicknamer.option.colournametag": "Warna nama di papan nama",
-    "text.autoconfig.scnicknamer.option.replacechat": "Nama panggilan dalam percakapan",
-    "text.autoconfig.scnicknamer.option.colourchat": "Warna nama dalam percakapan",
-    "text.autoconfig.scnicknamer.option.locatorbar": "Warna ikon di bar lokasi",
-    "text.autoconfig.scnicknamer.option.useWhitelist": "Gunakan whitelist server yang direkomendasikan",
+    "config.scnicknamer.option.enableMod": "Aktifkan Mod",
+    "config.scnicknamer.option.apiLink": "API Link",
+    "config.scnicknamer.option.replacetablist": "Nama panggilan di daftar tab",
+    "config.scnicknamer.option.colourtablist": "Warma nama di daftar tab",
+    "config.scnicknamer.option.replacenametag": "Nama panggilan di papan nama",
+    "config.scnicknamer.option.colournametag": "Warna nama di papan nama",
+    "config.scnicknamer.option.replacechat": "Nama panggilan dalam percakapan",
+    "config.scnicknamer.option.colourchat": "Warna nama dalam percakapan",
+    "config.scnicknamer.option.locatorbar": "Warna ikon di bar lokasi",
+    "config.scnicknamer.option.useWhitelist": "Gunakan whitelist server yang direkomendasikan",
 
-    "text.autoconfig.scnicknamer.option.enableMod.@Tooltip": "Permaninan harus dimulai ulang setelah diaktifkan.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[0]": "Biarkan kosong untuk Spooncraft.",
-    "text.autoconfig.scnicknamer.option.apiLink.@Tooltip[1]": "Permainan harus dimulai ulang setelah melakukan perubahan.",
-    "text.autoconfig.scnicknamer.option.useWhitelist.@Tooltip": "Ini disediakan oleh sumber data, dan direkomendasikan untuk sebagian besar pengguna.",
+    "config.scnicknamer.option.enableMod.tooltip": "Permaninan harus dimulai ulang setelah diaktifkan.",
+    "config.scnicknamer.option.apiLink.tooltip0": "Biarkan kosong untuk Spooncraft.",
+    "config.scnicknamer.option.apiLink.tooltip1": "Permainan harus dimulai ulang setelah melakukan perubahan.",
+    "config.scnicknamer.option.useWhitelist.tooltip": "Ini disediakan oleh sumber data, dan direkomendasikan untuk sebagian besar pengguna.",
 
     "text.scnicknamer.status.disabled": "SCNicknamer dinonaktifkan.",
     "text.scnicknamer.status.working": "SCNicknamer belum selesai melakukan pengaturan.",

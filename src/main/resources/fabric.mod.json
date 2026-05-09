@@ -14,10 +14,10 @@
 		}
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/mod/sc-name-link",
+		"homepage": "https://modrinth.com/mod/scnicknamer",
 		"sources": "https://github.com/GoldenRedstone/SCNicknamer",
 		"issues": "https://github.com/PointerRain/SCNicknamer/issues",
-		"modrinth": "https://modrinth.com/mod/sc-name-link",
+		"modrinth": "https://modrinth.com/mod/scnicknamer",
 		"discord": "https://discord.gg/yPafK59A8b"
 	},
 	"license": "CC0-1.0",
