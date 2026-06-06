@@ -31,17 +31,17 @@ public abstract class EntityRendererMixin {
                             "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/phys/Vec3;" +
                             "ILnet/minecraft/network/chat/Component;" +
                             "ZIDLnet/minecraft/client/renderer/state/level/CameraRenderState;)V"))
-    protected void submitNameTag(Args args, @Local(argsOnly = true) EntityRenderState state) {
-
-        Component text = args.get(3);
+    protected void submitNameTag(Args args, @Local(argsOnly = true, name = "state") EntityRenderState state) {
 
         if (!SCNicknamerClient.isEnabled() || (!CONFIG.replacenametag && !CONFIG.colournametag)) {
             return;
         }
         Entity entity = ((IEntityProvider) state).spooncraft_Name_Link$getEntity();
-//        if (!(entity instanceof Player player)) {
-//            return;
-//        }
+        if (entity == null) {
+            return;
+        }
+
+        Component text = args.get(3);
 
         Component label = SCNicknamerClient.getStyledName(text, entity.getUUID(),
                                                      CONFIG.replacenametag, CONFIG.colournametag);
