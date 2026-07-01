@@ -27,11 +27,11 @@ public abstract class EntityRendererMixin {
             "Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;" +
             "Lnet/minecraft/client/renderer/state/level/CameraRenderState;I)V",
             at = @At (value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitNameTag" +
-                            "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/phys/Vec3;" +
+                    target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitNameTag(" +
+                            "Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/phys/Vec3;" +
                             "ILnet/minecraft/network/chat/Component;" +
-                            "ZIDLnet/minecraft/client/renderer/state/level/CameraRenderState;)V"))
-    protected void submitNameTag(Args args, @Local(argsOnly = true, name = "state") EntityRenderState state) {
+                            "ZILnet/minecraft/client/renderer/state/level/CameraRenderState;)V"))
+    protected void submitNameTag(Args args, @Local EntityRenderState state) {
 
         if (!SCNicknamerClient.isEnabled() || (!CONFIG.replacenametag && !CONFIG.colournametag)) {
             return;

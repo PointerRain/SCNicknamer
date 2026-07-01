@@ -40,7 +40,7 @@ public abstract class HoverEventMixin {
             this.name.ifPresent(this.linesCache::add);
             this.linesCache.add(Component.translatable("gui.entity_tooltip.type",
                     this.type.getDescription()));
-            if (this.type == EntityType.PLAYER && this.name.isPresent()) {
+            if (this.name.isPresent()) {
                 DisplayMapping mapping = SCNicknamerClient.getMapping(this.uuid);
                 if (mapping != null && mapping.nickname() != null) {
                     this.linesCache.add(Component.translatable("gui.scnicknamer.hover_nickname",

@@ -36,7 +36,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         LOGGER.info("Game joined, current NameLinkAPI status: {}", NameLinkAPI.getStatus());
         SCNicknamerClient.setServer(getServerData() == null ? null : getServerData().ip);
         LOGGER.info("Is server whitelisted? {}", SCNicknamerClient.isEnabled());
-        ChatComponent chatHud = Minecraft.getInstance().gui.getChat();
+        ChatComponent chatHud = Minecraft.getInstance().gui.hud.getChat();
         if (NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.SUCCESS && NameLinkAPI.getStatus() != NameLinkAPI.FetchStatus.DISABLED) {
 //            chatHud.addMessage(SCNicknamerClient.getStatusString());
             chatHud.addClientSystemMessage(SCNicknamerClient.getStatusString());
